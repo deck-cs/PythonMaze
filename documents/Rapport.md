@@ -12,3 +12,5 @@ Identifying the Problem:
 - Testing the Design and code.
   Documenting the Solution:
 - A tentative outline should be made for the 6 pages.
+
+Deadline: 26-09-19

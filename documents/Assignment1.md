@@ -25,3 +25,5 @@
    You can make an A \* algorithm and test it against the recursive solution.
    The assignment must be completed within 2 weeks and must be completed with your
    review group. Of course, it must be approved by me after.
+
+Deadline: 03-10-19
