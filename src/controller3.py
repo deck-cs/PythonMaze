@@ -57,6 +57,7 @@ def DFS(maze, coords=(0, 0)):
 
 
 def search(x, y):
+    global pv
     if maze[x][y] == '2':
         print('found at %d,%d' % (x, y))
         print('\n'.join([''.join(['{:4}'.format(item) for item in row])
@@ -66,20 +67,16 @@ def search(x, y):
         print('wall at %d,%d' % (x, y))
         return False
     elif maze[x][y] == '3':
-        global pv
         print('visited at %d,%d' % (x, y))
         pv += 1
         return False
 
     print('visiting %d,%d' % (x, y))
-    pv += 1
 
     # mark as visited
-    
-    maze[x][y] = '3'
-    print('\n'.join([''.join(['{:4}'.format(item) for item in row])
-                     for row in maze]))
 
+    maze[x][y] = '3'
+    pv += 1
     # explore neighbors clockwise starting by the one on the right-
     if ((x < len(maze)-1 and search(x+1, y))
         or (y > 0 and search(x, y-1))
@@ -89,10 +86,10 @@ def search(x, y):
     return False
 
 
-maze = DFS(make_empty_maze(4, 4), (0, 0))
-pretty(maze)
+maze = DFS(make_empty_maze(12, 12), (0, 0))
 maze = convert(maze)
-maze[8][6] = '2'
-print(maze)
-search(1, 1)
+maze[len(maze)-1][len(maze)-2] = '2'
+maze[0][1] = '0'
+search(0, 1)
 print("places visited = " + str(pv))
+print(len(maze[5]))
