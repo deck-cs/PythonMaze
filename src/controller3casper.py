@@ -1,17 +1,19 @@
-import sys, time
+import sys
+import time
 from random import randint, shuffle, choice
 import matplotlib.pyplot as plt
+import numpy as np
 
 
 # needed for DFS...
 sys.setrecursionlimit(10000)
 pv = 0
+solvedTimesList = []
+pvList = []
 
 # Each maze cell contains a tuple of directions of cells to which it is connected
 
 # Takes a maze and converts it to an array of X's and blanks to represent walls, etc
-
-
 
 
 def convert(maze):
@@ -60,16 +62,17 @@ def DFS(maze, coords=(0, 0)):
     return maze
 
 
-def search(x, y):
-    
+def search(x, y, maze, start):
     global pv
     if maze[x][y] == '2':
         print('found at %d,%d' % (x, y))
         end = time.time()
-
+        
         print('\n'.join([''.join(['{:4}'.format(item) for item in row])
                          for row in maze]))
-        print("Time used:" + " " + str(end - start))
+        timeUsed = end - start
+        print("Time used:" + " " + str((timeUsed)))
+        solvedTimesList.append(timeUsed)
         return True
     elif maze[x][y] == '1':
         print('wall at %d,%d' % (x, y))
@@ -86,28 +89,45 @@ def search(x, y):
     maze[x][y] = '3'
     pv += 1
     # explore neighbors clockwise starting by the one on the right-
-    if ((x < len(maze)-1 and search(x+1, y))
-        or (y > 0 and search(x, y-1))
-        or (x > 0 and search(x-1, y))
-            or (y < len(maze)-1 and search(x, y+1))):
+    if ((x < len(maze)-1 and search(x+1, y, maze, start))
+        or (y > 0 and search(x, y-1, maze, start))
+        or (x > 0 and search(x-1, y, maze, start))
+            or (y < len(maze)-1 and search(x, y+1, maze, start))):
         return True
     return False
 
 
-maze = DFS(make_empty_maze(12, 12), (0, 0))
-maze = convert(maze)
-maze[len(maze)-1][len(maze)-2] = '2'
-maze[0][1] = '0'
-start = time.time()
-search(0, 1)
-print("places visited = " + str(pv))
+def makeMazeAndSolve(size):
+    maze = DFS(make_empty_maze(size, size), (0, 0))
+    maze = convert(maze)
+    maze[len(maze)-1][len(maze)-2] = '2'
+    maze[0][1] = '0'
+    start = time.time()
+    search(0, 1, maze, start)
+    pvList.append(pv)
+    print("places visited = " + str(pv))
 
-plt.cla()
-plt.bar(10, 10 ,width=0.5, align='center') # bar(x-vals, y-vals, bar width, align bar relative to x-val on x-axis) )
-#plt.ticklabel_format(useOffset=False)
-plt.axis([0, 0, 100, 100]) #axis(x-min, x-max, y-min, y-max)
-plt.title("Test", fontsize=12)
-plt.xlabel("Ages", fontsize=10)
-plt.ylabel("Amount", fontsize=10)
-plt.tick_params(axis='both', which='major', labelsize=10)
+for x in range(10):
+    pv = 0
+    makeMazeAndSolve(5)
+
+
+print(solvedTimesList)
+print(pvList)
+
+
+N = 5
+
+ind = np.arange(N)    # the x locations for the groups
+width = 0.35       # the width of the bars: can also be len(x) sequence
+
+p1 = plt.bar(ind, solvedTimesList, width)
+p2 = plt.bar(ind, pvList, width)
+
+plt.ylabel('Scores')
+plt.title('Scores by group and gender')
+plt.xticks(ind, ('G1', 'G2', 'G3', 'G4', 'G5'))
+plt.yticks(np.arange(0, 81, 10))
+plt.legend((p1[0], p2[0]), ('Men', 'Women'))
+
 plt.show()
