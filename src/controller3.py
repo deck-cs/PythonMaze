@@ -1,11 +1,14 @@
 import sys
 import time
 from random import randint, shuffle, choice
+import matplotlib.pyplot as plt
 
 
 # needed for DFS...
 sys.setrecursionlimit(10000)
 pv = 0
+solvedTimesList = []
+pvList = []
 
 # Each maze cell contains a tuple of directions of cells to which it is connected
 
@@ -59,15 +62,16 @@ def DFS(maze, coords=(0, 0)):
 
 
 def search(x, y, maze, start):
-
     global pv
     if maze[x][y] == '2':
         print('found at %d,%d' % (x, y))
         end = time.time()
-
+        
         print('\n'.join([''.join(['{:4}'.format(item) for item in row])
                          for row in maze]))
-        print("Time used:" + " " + str((end - start)))
+        timeUsed = end - start
+        print("Time used:" + " " + str((timeUsed)))
+        solvedTimesList.append(timeUsed)
         return True
     elif maze[x][y] == '1':
         print('wall at %d,%d' % (x, y))
@@ -99,7 +103,23 @@ def makeMazeAndSolve(size):
     maze[0][1] = '0'
     start = time.time()
     search(0, 1, maze, start)
+    pvList.append(pv)
     print("places visited = " + str(pv))
 
+for x in range(10):
+    pv = 0
+    makeMazeAndSolve(5)
 
-makeMazeAndSolve(5)
+
+print(solvedTimesList)
+print(pvList)
+
+plt.cla()
+plt.bar(10, 10 ,width=0.5, align='center') # bar(x-vals, y-vals, bar width, align bar relative to x-val on x-axis) )
+#plt.ticklabel_format(useOffset=False)
+plt.axis([0, 0, 100, 100]) #axis(x-min, x-max, y-min, y-max)
+plt.title("Test", fontsize=12)
+plt.xlabel("Ages", fontsize=10)
+plt.ylabel("Amount", fontsize=10)
+plt.tick_params(axis='both', which='major', labelsize=10)
+plt.show()
