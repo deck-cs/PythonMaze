@@ -1,4 +1,5 @@
-import sys, time
+import sys
+import time
 from random import randint, shuffle, choice
 
 
@@ -9,8 +10,6 @@ pv = 0
 # Each maze cell contains a tuple of directions of cells to which it is connected
 
 # Takes a maze and converts it to an array of X's and blanks to represent walls, etc
-
-
 
 
 def convert(maze):
@@ -59,8 +58,8 @@ def DFS(maze, coords=(0, 0)):
     return maze
 
 
-def search(x, y):
-    
+def search(x, y, maze, start):
+
     global pv
     if maze[x][y] == '2':
         print('found at %d,%d' % (x, y))
@@ -68,7 +67,7 @@ def search(x, y):
 
         print('\n'.join([''.join(['{:4}'.format(item) for item in row])
                          for row in maze]))
-        print("Time used:" + " " + str(end - start))
+        print("Time used:" + " " + str((end - start)))
         return True
     elif maze[x][y] == '1':
         print('wall at %d,%d' % (x, y))
@@ -85,18 +84,22 @@ def search(x, y):
     maze[x][y] = '3'
     pv += 1
     # explore neighbors clockwise starting by the one on the right-
-    if ((x < len(maze)-1 and search(x+1, y))
-        or (y > 0 and search(x, y-1))
-        or (x > 0 and search(x-1, y))
-            or (y < len(maze)-1 and search(x, y+1))):
+    if ((x < len(maze)-1 and search(x+1, y, maze, start))
+        or (y > 0 and search(x, y-1, maze, start))
+        or (x > 0 and search(x-1, y, maze, start))
+            or (y < len(maze)-1 and search(x, y+1, maze, start))):
         return True
     return False
 
 
-maze = DFS(make_empty_maze(12, 12), (0, 0))
-maze = convert(maze)
-maze[len(maze)-1][len(maze)-2] = '2'
-maze[0][1] = '0'
-start = time.time()
-search(0, 1)
-print("places visited = " + str(pv))
+def makeMazeAndSolve(size):
+    maze = DFS(make_empty_maze(size, size), (0, 0))
+    maze = convert(maze)
+    maze[len(maze)-1][len(maze)-2] = '2'
+    maze[0][1] = '0'
+    start = time.time()
+    search(0, 1, maze, start)
+    print("places visited = " + str(pv))
+
+
+makeMazeAndSolve(5)
