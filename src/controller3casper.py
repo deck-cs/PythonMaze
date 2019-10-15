@@ -1,5 +1,4 @@
-import sys
-import time
+import sys, time
 from random import randint, shuffle, choice
 import matplotlib.pyplot as plt
 
@@ -7,12 +6,12 @@ import matplotlib.pyplot as plt
 # needed for DFS...
 sys.setrecursionlimit(10000)
 pv = 0
-solvedTimesList = []
-pvList = []
 
 # Each maze cell contains a tuple of directions of cells to which it is connected
 
 # Takes a maze and converts it to an array of X's and blanks to represent walls, etc
+
+
 
 
 def convert(maze):
@@ -61,7 +60,8 @@ def DFS(maze, coords=(0, 0)):
     return maze
 
 
-def search(x, y, maze, start):
+def search(x, y):
+    
     global pv
     if maze[x][y] == '2':
         print('found at %d,%d' % (x, y))
@@ -69,9 +69,7 @@ def search(x, y, maze, start):
 
         print('\n'.join([''.join(['{:4}'.format(item) for item in row])
                          for row in maze]))
-        timeUsed = end - start
-        print("Time used:" + " " + str((timeUsed)))
-        solvedTimesList.append(timeUsed)
+        print("Time used:" + " " + str(end - start))
         return True
     elif maze[x][y] == '1':
         print('wall at %d,%d' % (x, y))
@@ -88,52 +86,26 @@ def search(x, y, maze, start):
     maze[x][y] = '3'
     pv += 1
     # explore neighbors clockwise starting by the one on the right-
-    if ((x < len(maze)-1 and search(x+1, y, maze, start))
-        or (y > 0 and search(x, y-1, maze, start))
-        or (x > 0 and search(x-1, y, maze, start))
-            or (y < len(maze)-1 and search(x, y+1, maze, start))):
+    if ((x < len(maze)-1 and search(x+1, y))
+        or (y > 0 and search(x, y-1))
+        or (x > 0 and search(x-1, y))
+            or (y < len(maze)-1 and search(x, y+1))):
         return True
     return False
 
 
-##################### Print to file #####################
-
-def printToFile(mazeToPrint):
-    file = open("testfile.txt", "w")
-
-    file.write(str(mazeToPrint))
-    # file.write("This is our new text file")
-    # file.write("and this is another line.")
-    # file.write("Why? Because we can.")
-
-    file.close()
-
-
-def makeMazeAndSolve(size):
-    maze = DFS(make_empty_maze(size, size), (0, 0))
-    maze = convert(maze)
-    maze[len(maze)-1][len(maze)-2] = '2'
-    maze[0][1] = '0'
-    start = time.time()
-    search(0, 1, maze, start)
-    pvList.append(pv)
-    print("places visited = " + str(pv))
-    printToFile(maze)
-
-
-for x in range(10):
-    pv = 0
-    makeMazeAndSolve(5)
-
-
-print(solvedTimesList)
-print(pvList)
+maze = DFS(make_empty_maze(12, 12), (0, 0))
+maze = convert(maze)
+maze[len(maze)-1][len(maze)-2] = '2'
+maze[0][1] = '0'
+start = time.time()
+search(0, 1)
+print("places visited = " + str(pv))
 
 plt.cla()
-# bar(x-vals, y-vals, bar width, align bar relative to x-val on x-axis) )
-plt.bar(10, 10, width=0.5, align='center')
-# plt.ticklabel_format(useOffset=False)
-plt.axis([0, 0, 100, 100])  # axis(x-min, x-max, y-min, y-max)
+plt.bar(10, 10 ,width=0.5, align='center') # bar(x-vals, y-vals, bar width, align bar relative to x-val on x-axis) )
+#plt.ticklabel_format(useOffset=False)
+plt.axis([0, 0, 100, 100]) #axis(x-min, x-max, y-min, y-max)
 plt.title("Test", fontsize=12)
 plt.xlabel("Ages", fontsize=10)
 plt.ylabel("Amount", fontsize=10)
