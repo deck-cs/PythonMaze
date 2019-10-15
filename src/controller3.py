@@ -1,5 +1,6 @@
+import sys, time
 from random import randint, shuffle, choice
-import sys
+
 
 # needed for DFS...
 sys.setrecursionlimit(10000)
@@ -8,6 +9,8 @@ pv = 0
 # Each maze cell contains a tuple of directions of cells to which it is connected
 
 # Takes a maze and converts it to an array of X's and blanks to represent walls, etc
+
+
 
 
 def convert(maze):
@@ -57,11 +60,15 @@ def DFS(maze, coords=(0, 0)):
 
 
 def search(x, y):
+    
     global pv
     if maze[x][y] == '2':
         print('found at %d,%d' % (x, y))
+        end = time.time()
+
         print('\n'.join([''.join(['{:4}'.format(item) for item in row])
                          for row in maze]))
+        print("Time used:" + " " + str(end - start))
         return True
     elif maze[x][y] == '1':
         print('wall at %d,%d' % (x, y))
@@ -90,6 +97,6 @@ maze = DFS(make_empty_maze(12, 12), (0, 0))
 maze = convert(maze)
 maze[len(maze)-1][len(maze)-2] = '2'
 maze[0][1] = '0'
+start = time.time()
 search(0, 1)
 print("places visited = " + str(pv))
-print(len(maze[5]))
