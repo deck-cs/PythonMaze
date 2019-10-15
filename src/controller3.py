@@ -86,8 +86,22 @@ def search(x, y):
     return False
 
 
+##################### Print to file #####################
+
+def printToFile(mazeToPrint):
+    file = open("testfile.txt", "w")
+
+
+    file.write(str(mazeToPrint))
+    # file.write("This is our new text file")
+    # file.write("and this is another line.")
+    # file.write("Why? Because we can.")
+
+    file.close()
+
 maze = DFS(make_empty_maze(12, 12), (0, 0))
 maze = convert(maze)
+printToFile(maze)
 maze[len(maze)-1][len(maze)-2] = '2'
 maze[0][1] = '0'
 search(0, 1)
