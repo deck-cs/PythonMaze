@@ -151,8 +151,12 @@ theTimes = list(solvingTimes.values())
 # Drawing stuff
 
 plt.cla()
+fig, ax1 = plt.subplots()
 # bar(x-vals, y-vals, bar width, align bar relative to x-val on x-axis) )
-plt.bar(tryList, theTimes, width=0.5, align='center')
+ax1.bar(tryList, theTimes, width=0.5, align='center')
+ax2 = ax1.twinx()
+
+ax2.bar(tryList, pvList, width=0.3, align='edge',color='orange')
 # plt.ticklabel_format(useOffset=False)
 plt.axis([0, len(solvingTimes)+1, 0, max(theTimes)+0.01])  # axis(x-min, x-max, y-min, y-max)
 plt.title("Barplot Time to solve", fontsize=12)
