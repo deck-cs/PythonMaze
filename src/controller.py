@@ -16,12 +16,19 @@ tryList = []
 
 def prefab():
     sys.setrecursionlimit(10000)
+    global pv
     pv = 0
+    global solvedTimesList
     solvedTimesList = []
+    global pvList 
     pvList = []
+    global solvingTimes
     solvingTimes = []
+    global relatedValues 
     relatedValues = []
-    theTimes= []
+    global theTimes 
+    theTimes = []
+    global tryList 
     tryList = []
 
 # Each maze cell contains a tuple of directions of cells to which it is connected
