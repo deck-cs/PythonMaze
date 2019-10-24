@@ -7,9 +7,9 @@ import matplotlib.pyplot as plt
 
 # needed for DFS...
 sys.setrecursionlimit(10000)
-pv = 0
+pv = 0  # PlaceVisited
 solvedTimesList = []
-pvList = []
+pvList = []  # Placevisited list
 
 # Each maze cell contains a tuple of directions of cells to which it is connected
 
@@ -68,7 +68,7 @@ def search(x, y, maze, start):
         print('found at %d,%d' % (x, y))
         end = time.time()
         mv.mazeRenderer(maze)
-        #print('\n'.join([''.join(['{:4}'.format(item) for item in row])
+        # print('\n'.join([''.join(['{:4}'.format(item) for item in row])
         #                 for row in maze]))
         timeUsed = end - start
         print("Time used:" + " " + str((timeUsed)))
@@ -132,16 +132,18 @@ print(pvList)
 
 # Setting keys on the solvedTimesList(just for working with the x-axis)
 
+
 def makeStatNumbers():
     solvingTimes = {}
     x = 1
     for aTry in solvedTimesList:
-        solvingTimes.setdefault(x,0)
+        solvingTimes.setdefault(x, 0)
         solvingTimes[x] = aTry
-        x+=1
+        x += 1
     return solvingTimes
 
 # Splitting the keys and the values up into lists
+
 
 solvingTimes = makeStatNumbers()
 tryList = list(solvingTimes.keys())
@@ -150,18 +152,18 @@ theTimes = list(solvingTimes.values())
 
 # Drawing stuff
 
-#plt.cla()
+# plt.cla()
 fig1, ax1 = plt.subplots()
 ax1.set_ylabel('Time for solve', color='tab:blue')
 # bar(x-vals, y-vals, bar width, align bar relative to x-val on x-axis) )
 ax1.bar(tryList, theTimes, width=0.5, align='center')
 ax2 = ax1.twinx()
 
-ax2.bar(tryList, pvList, width=0.3, align='edge',color='orange')
+ax2.bar(tryList, pvList, width=0.3, align='edge', color='orange')
 ax2.set_ylabel('Attempts', color='tab:orange')
 ax2.tick_params(axis='y')
 # plt.ticklabel_format(useOffset=False)
-#plt.axis([0, len(solvingTimes)+1, 0, max(theTimes)+0.01])  # axis(x-min, x-max, y-min, y-max)
+# plt.axis([0, len(solvingTimes)+1, 0, max(theTimes)+0.01])  # axis(x-min, x-max, y-min, y-max)
 plt.title("Barplot Time to solve", fontsize=12)
 plt.xlabel("Attempt", fontsize=10)
 #plt.ylabel("TimeSolved", fontsize=10)
@@ -171,14 +173,14 @@ plt.tick_params(axis='both', which='major', labelsize=10)
 relatedValues = {}
 y = 0
 for interval in tryList:
-    solvingTimes.setdefault(y,0)
+    solvingTimes.setdefault(y, 0)
     relatedValues[y] = theTimes[y]/tryList[y]
-    y+=1
+    y += 1
 
 newRelatedValues = list(relatedValues.values())
 
 fig2, ax3 = plt.subplots()
-ax3.bar(tryList, newRelatedValues, width = 0.3, align='center')
+ax3.bar(tryList, newRelatedValues, width=0.3, align='center')
 ax3.set_ylabel('Time pr. move', color='tab:red')
 ax3.tick_params(axis='y')
 plt.show()
