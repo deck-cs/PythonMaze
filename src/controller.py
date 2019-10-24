@@ -209,7 +209,6 @@ def getStatValues():
 def getRelatedValues():
     global relatedValues
     relatedValues = list(relatedValues.values())
-        x += 1
     return solvingTimes
 
 # Splitting the keys and the values up into lists
