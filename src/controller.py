@@ -191,7 +191,7 @@ def makeStatNumbers():
     y = 0
     for interval in solvingTimes:
         relatedValues.setdefault(y,0)
-        relatedValues[y] = getStatValues()[y]/getStatKeys()[y]
+        relatedValues[y] = getStatValues()[y]/pvList[y]
         y+=1
 
 # Splitting the keys and the values up into lists
