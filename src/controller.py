@@ -122,7 +122,7 @@ def makeMazeAndSolve(size):
     printToFile(maze)
 
 
-for x in range(10):
+for x in range(50):
     pv = 0
     makeMazeAndSolve(5)
 
@@ -151,7 +151,7 @@ theTimes = list(solvingTimes.values())
 # Drawing stuff
 
 #plt.cla()
-fig, ax1 = plt.subplots()
+fig1, ax1 = plt.subplots()
 ax1.set_ylabel('Time for solve', color='tab:blue')
 # bar(x-vals, y-vals, bar width, align bar relative to x-val on x-axis) )
 ax1.bar(tryList, theTimes, width=0.5, align='center')
@@ -166,4 +166,19 @@ plt.title("Barplot Time to solve", fontsize=12)
 plt.xlabel("Attempt", fontsize=10)
 #plt.ylabel("TimeSolved", fontsize=10)
 plt.tick_params(axis='both', which='major', labelsize=10)
+
+
+relatedValues = {}
+y = 0
+for interval in tryList:
+    solvingTimes.setdefault(y,0)
+    relatedValues[y] = theTimes[y]/tryList[y]
+    y+=1
+
+newRelatedValues = list(relatedValues.values())
+
+fig2, ax3 = plt.subplots()
+ax3.bar(tryList, newRelatedValues, width = 0.3, align='center')
+ax3.set_ylabel('Time pr. move', color='tab:red')
+ax3.tick_params(axis='y')
 plt.show()
