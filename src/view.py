@@ -4,7 +4,7 @@ import matplotlib.pyplot as plt
 tryList = {}
 theTimes = {}
 relatedValues = {}
-pvList = {}
+pvList = []
 
 def makePlot():
     fig1, ax1 = plt.subplots()
@@ -28,14 +28,24 @@ def makePlot():
     ax3.tick_params(axis='y')
     plt.show()
 
-cntr.mainRun(10)
-cntr.pv
-cntr.makeStatNumbers()
-pvList = cntr.pvList
-cntr.getStatKeys()
-cntr.getStatValues()
-cntr.getRelatedValues()
+for x in range(2):
+    cntr.mainRun((x+1)*5)
+    cntr.makeStatNumbers()
+    cntr.getStatKeys()
+    cntr.getStatValues()
+    cntr.getRelatedValues()
+    cntr.getPvListFinal()
 tryList = list(cntr.tryList)
+#remove zeroes cause dammmmn them zeroes!
 relatedValues = list(cntr.relatedValues)
 theTimes = list(cntr.theTimes)
+pvList = list(cntr.pvListFinal)
+print(tryList)
+print("try")
+print(relatedValues)
+print("relate")
+print(theTimes)
+print("time")
+print(pvList)
+print("placesV")
 makePlot()

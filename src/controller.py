@@ -13,6 +13,7 @@ solvingTimes = []
 relatedValues = []
 theTimes= []
 tryList = []
+pvListFinal = []
 
 def prefab():
     sys.setrecursionlimit(10000)
@@ -24,12 +25,6 @@ def prefab():
     pvList = []
     global solvingTimes
     solvingTimes = []
-    global relatedValues 
-    relatedValues = []
-    global theTimes 
-    theTimes = []
-    global tryList 
-    tryList = []
 
 # Each maze cell contains a tuple of directions of cells to which it is connected
 # Takes a maze and converts it to an array of X's and blanks to represent walls, etc
@@ -174,7 +169,7 @@ def makeMazeAndSolve(size):
 
 def mainRun(size):
     prefab()
-    for x in range(50): #number of MakeAndSolves
+    for x in range(10): #number of MakeAndSolves
         global pv
         pv = 0
         makeMazeAndSolve(size) #input is size
@@ -195,28 +190,41 @@ def makeStatNumbers():
         solvingTimes.setdefault(x, 0)
         solvingTimes[x] = aTry
         x+=1
-    relatedValues = {}
-    y = 0
-    for interval in solvingTimes:
-        relatedValues.setdefault(y,0)
-        relatedValues[y] = getStatValues()[y]/pvList[y]
-        y+=1
-
 # Splitting the keys and the values up into lists
 def getStatKeys():
     global tryList
-    tryList = list(solvingTimes.keys())
+    """
+    tryList.append("min")
+    tryList.append("avg")
+    tryList.append("max")
+    """
+    tryList.append(0)
+    iter = max(tryList)
+    for x in range(3):
+        tryList.append(iter+x+1)
     return tryList
 
-#solvingTimes = makeStatNumbers()
 def getStatValues():
     global theTimes
-    theTimes = list(solvingTimes.values())
+    theTimes.append(min(list(solvingTimes.values())))
+    theTimes.append(sum(list(solvingTimes.values()))/len(list(solvingTimes.values())))
+    theTimes.append(max(list(solvingTimes.values())))
     return theTimes
 
 def getRelatedValues():
     global relatedValues
-    relatedValues = list(relatedValues.values())
-    return solvingTimes
+    solveList = list(solvingTimes.values())
+    minKey = min(solvingTimes, key=solvingTimes.get)-1
+    relatedValues.append(min(solveList)/pvList[minKey])
 
+    relatedValues.append((sum(solveList)/len(solveList))/((sum(pvList)/len(pvList))))
+
+    maxKey = max(solvingTimes, key=solvingTimes.get)-1
+    relatedValues.append(min(solveList)/pvList[maxKey])
+
+def getPvListFinal():
+    global pvListFinal
+    pvListFinal.append(min(pvList))
+    pvListFinal.append(sum(pvList)/len(pvList))
+    pvListFinal.append(max(pvList))
 # Splitting the keys and the values up into lists
