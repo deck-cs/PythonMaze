@@ -12,7 +12,6 @@ solvedTimesList = []
 pvList = []  # Placevisited list
 
 # Each maze cell contains a tuple of directions of cells to which it is connected
-
 # Takes a maze and converts it to an array of X's and blanks to represent walls, etc
 
 
@@ -113,9 +112,10 @@ nameOfFile = "testfile.txt"
 def printToFile(mazeToPrint):
     print("Writing til file")
     try:
-        file = open("{nameOfFile}", "w")
+        file = open("{nameOfFile}", "w+")
         try:
             print("Printing to file")
+            file.write(str("places visited = " + str(pv)))
             file.write(str(mazeToPrint))
         finally:
             print("Going to close the file - WRITE")
