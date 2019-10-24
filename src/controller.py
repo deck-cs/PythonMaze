@@ -16,12 +16,19 @@ tryList = []
 
 def prefab():
     sys.setrecursionlimit(10000)
+    global pv
     pv = 0
+    global solvedTimesList
     solvedTimesList = []
+    global pvList 
     pvList = []
+    global solvingTimes
     solvingTimes = []
+    global relatedValues 
     relatedValues = []
-    theTimes= []
+    global theTimes 
+    theTimes = []
+    global tryList 
     tryList = []
 
 # Each maze cell contains a tuple of directions of cells to which it is connected
@@ -165,11 +172,12 @@ def makeMazeAndSolve(size):
     printToFile(maze)
     readFromFile()
 
-def mainRun():
-    for x in range(50):
+def mainRun(size):
+    prefab()
+    for x in range(50): #number of MakeAndSolves
         global pv
         pv = 0
-        makeMazeAndSolve(5)
+        makeMazeAndSolve(size) #input is size
 
 
     print(solvedTimesList)
@@ -191,7 +199,7 @@ def makeStatNumbers():
     y = 0
     for interval in solvingTimes:
         relatedValues.setdefault(y,0)
-        relatedValues[y] = getStatValues()[y]/getStatKeys()[y]
+        relatedValues[y] = getStatValues()[y]/pvList[y]
         y+=1
 
 # Splitting the keys and the values up into lists
