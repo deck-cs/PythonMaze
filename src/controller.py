@@ -14,6 +14,7 @@ relatedValues = []
 theTimes= []
 tryList = []
 pvListFinal = []
+iteration = 5
 
 def prefab():
     sys.setrecursionlimit(10000)
@@ -193,15 +194,17 @@ def makeStatNumbers():
 # Splitting the keys and the values up into lists
 def getStatKeys():
     global tryList
-    """
-    tryList.append("min")
-    tryList.append("avg")
-    tryList.append("max")
-    """
-    tryList.append(0)
-    iter = max(tryList)
-    for x in range(3):
-        tryList.append(iter+x+1)
+    global iteration
+    min = "min"
+    min+=str(iteration)
+    avg = "avg"
+    avg+=str(iteration)
+    max = "max"
+    max+= str(iteration)
+    tryList.append(min)
+    tryList.append(avg)
+    tryList.append(max)
+    iteration+=5
     return tryList
 
 def getStatValues():
