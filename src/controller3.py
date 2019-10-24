@@ -6,8 +6,9 @@ import matplotlib.pyplot as plt
 
 # needed for DFS...
 sys.setrecursionlimit(10000)
-pv = 0
+pv = 0 #PlaceVisited
 solvedTimesList = []
+# Placevisited list
 pvList = []
 
 # Each maze cell contains a tuple of directions of cells to which it is connected
