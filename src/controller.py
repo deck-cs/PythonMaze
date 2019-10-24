@@ -173,8 +173,10 @@ def makeMazeAndSolve(size):
     readFromFile()
 
 def mainRun(size):
+    prefab()
     for x in range(50): #number of MakeAndSolves
-        prefab()
+        global pv
+        pv = 0
         makeMazeAndSolve(size) #input is size
 
 
