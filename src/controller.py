@@ -6,7 +6,7 @@ import matplotlib.pyplot as plt
 
 # needed for DFS...
 sys.setrecursionlimit(10000)
-pv = 0
+pv = 0  # PlaceVisited
 solvedTimesList = []
 pvList = []
 solvingTimes = []
@@ -19,13 +19,12 @@ def prefab():
     pv = 0
     solvedTimesList = []
     pvList = []
-    solvingTimes = {}
-    relatedValues = {}
-    theTimes= {}
-    tryList = {}
+    solvingTimes = []
+    relatedValues = []
+    theTimes= []
+    tryList = []
 
 # Each maze cell contains a tuple of directions of cells to which it is connected
-
 # Takes a maze and converts it to an array of X's and blanks to represent walls, etc
 
 
@@ -53,8 +52,11 @@ def pretty(maze):
 
 
 def make_empty_maze(width, height):
-    maze = [[[] for b in range(width)] for a in range(height)]
-    return maze
+    try:
+        maze = [[[] for b in range(width)] for a in range(height)]
+        return maze
+    except IndexError:
+        print("Error: can\'t make the maze")
 
 # Recursive backtracker.
 # Looks at its neighbors randomly, if unvisitied, visit and recurse
@@ -110,17 +112,45 @@ def search(x, y, maze, start):
     return False
 
 
-##################### Print to file #####################
+##################### Read and print to file #####################
+
+# 'r'  Read mode which is used when the file is only being read
+# 'w'  Write mode which is used to edit and write new information to the file(any existing files with the same name will be erased when this mode is activated)
+# 'a'  Appending mode, which is used to add new data to the end of the file that is new information is automatically amended to the end
+# 'r+' Special read and write mode, which is used to handle both actions when working with a file
+
+nameOfFile = "testfile.txt"
+
 
 def printToFile(mazeToPrint):
-    file = open("testfile.txt", "w")
+    print("Writing til file")
+    try:
+        file = open("{nameOfFile}", "w+")
+        try:
+            print("Printing to file")
+            file.write(str("places visited = " + str(pv)))
+            file.write(str(mazeToPrint))
+        finally:
+            print("Going to close the file - WRITE")
+            file.close()
+    except IOError:
+        print("Error: can\'t find file or read data")
 
-    file.write(str(mazeToPrint))
-    # file.write("This is our new text file")
-    # file.write("and this is another line.")
-    # file.write("Why? Because we can.")
 
-    file.close()
+def readFromFile():
+    print("Reading from file")
+    try:
+        file = open("{nameOfFile}", "r")
+        try:
+            print("Reading the file {nameOfFile}")
+            print(file.readlines())
+        finally:
+            print("Going to close the file - READ")
+            file.close()
+    except IOError:
+        print("Error: can\'t find file or read data")
+
+################### Read and print to file END ##################
 
 
 def makeMazeAndSolve(size):
@@ -133,6 +163,7 @@ def makeMazeAndSolve(size):
     pvList.append(pv)
     print("places visited = " + str(pv))
     printToFile(maze)
+    readFromFile()
 
 def mainRun():
     for x in range(50):
@@ -146,13 +177,14 @@ def mainRun():
 
 # Setting keys on the solvedTimesList(just for working with the x-axis)
 
+
 def makeStatNumbers():
     global solvingTimes
     global relatedValues
     solvingTimes = {}
     x = 1
     for aTry in solvedTimesList:
-        solvingTimes.setdefault(x,0)
+        solvingTimes.setdefault(x, 0)
         solvingTimes[x] = aTry
         x+=1
     relatedValues = {}
@@ -177,3 +209,7 @@ def getStatValues():
 def getRelatedValues():
     global relatedValues
     relatedValues = list(relatedValues.values())
+        x += 1
+    return solvingTimes
+
+# Splitting the keys and the values up into lists
