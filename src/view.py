@@ -28,7 +28,7 @@ def makePlot():
     ax3.tick_params(axis='y')
     plt.show()
 
-cntr.mainRun()
+cntr.mainRun(10)
 cntr.pv
 cntr.makeStatNumbers()
 pvList = cntr.pvList

@@ -165,11 +165,10 @@ def makeMazeAndSolve(size):
     printToFile(maze)
     readFromFile()
 
-def mainRun():
-    for x in range(50):
-        global pv
-        pv = 0
-        makeMazeAndSolve(5)
+def mainRun(size):
+    for x in range(50): #number of MakeAndSolves
+        prefab()
+        makeMazeAndSolve(size) #input is size
 
 
     print(solvedTimesList)
