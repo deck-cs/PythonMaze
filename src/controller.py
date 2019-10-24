@@ -112,7 +112,7 @@ nameOfFile = "testfile.txt"
 def printToFile(mazeToPrint):
     print("Writing til file")
     try:
-        file = open("{nameOfFile}", "w+")
+        file = open("testfile.txt", "w+")
         try:
             print("Printing to file")
             file.write(str("places visited = " + str(pv)))
@@ -127,9 +127,9 @@ def printToFile(mazeToPrint):
 def readFromFile():
     print("Reading from file")
     try:
-        file = open("{nameOfFile}", "r")
+        file = open("testfile.txt", "r")
         try:
-            print("Reading the file {nameOfFile}")
+            print("Reading the file testfile.txt")
             print(file.readlines())
         finally:
             print("Going to close the file - READ")
