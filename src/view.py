@@ -32,8 +32,8 @@ def makePlot():
     ax3.tick_params(axis='y')
     plt.show()
 
-for x in range(6):
-    cntr.mainRun((x+1)*5)
+for x in range(6):  #The range is how many 
+    cntr.mainRun((x+1)*5)   #Scales each iteration by 5
     cntr.makeStatNumbers()
     cntr.getStatKeys()
     cntr.getStatValues()
