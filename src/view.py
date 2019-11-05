@@ -40,7 +40,7 @@ for x in range(6):  #The range is how many
     cntr.getRelatedValues()
     cntr.getPvListFinal()
 tryList = list(cntr.tryList)
-#remove zeroes cause dammmmn them zeroes!
+
 relatedValues = list(cntr.relatedValues)
 theTimes = list(cntr.theTimes)
 pvList = list(cntr.pvListFinal)
