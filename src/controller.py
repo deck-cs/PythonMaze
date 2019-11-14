@@ -54,7 +54,7 @@ def pretty(maze):
     print("")
 
 # Returns an empty maze of given size
-
+#Beneath will be exported to MazeGenerator
 
 def make_empty_maze(width, height):
     try:
@@ -66,6 +66,7 @@ def make_empty_maze(width, height):
 # Recursive backtracker.
 # Looks at its neighbors randomly, if unvisitied, visit and recurse
 
+# Beneath will be exported to MazeGenerator
 
 def DFS(maze, coords=(0, 0)):
     directions = [(0, 1), (1, 0), (0, -1), (-1, 0)]
