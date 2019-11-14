@@ -1,8 +1,10 @@
 import sys
 import time
+
 import view as mv
 from random import randint, shuffle, choice
 import matplotlib.pyplot as plt
+
 
 
 
