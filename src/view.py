@@ -1,5 +1,7 @@
-import controller as cntr
+#import controller as cntr
 import matplotlib.pyplot as plt
+from Controller import MazeController as test
+
 
 tryList = {}
 theTimes = {}
@@ -31,7 +33,7 @@ def makePlot():
     ax3.set_ylabel('Time pr. move', color='tab:red')
     ax3.tick_params(axis='y')
     plt.show()
-
+"""
 for x in range(6):  #The range is how many 
     cntr.mainRun((x+1)*5)   #Scales each iteration by 5
     cntr.makeStatNumbers()
@@ -53,3 +55,8 @@ print("time")
 print(pvList)
 print("placesV")
 makePlot()
+"""
+print("Trying")
+maze = test.MazeController(1,5)
+maze.makeMaze()
+maze.solveMaze()
