@@ -2,7 +2,7 @@ import time
 class MazeSolver:
     def __init__(self, maze):  # also add solved methods when ready
         self.maze = maze
-        self.solvedTimesList = []
+        self.solvedTimes = 0
         self.pv = 0
 
     def search(self, x, y, maze, startTime):
@@ -15,7 +15,7 @@ class MazeSolver:
             #                 for row in maze]))
             timeUsed = end - startTime
             print("Time used:" + " " + str((timeUsed)))
-            self.solvedTimesList.append(timeUsed)
+            self.solvedTimes = timeUsed
             return True
         elif maze[x][y] == '1':
             print('wall at %d,%d' % (x, y))
