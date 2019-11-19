@@ -15,9 +15,9 @@ class MazeController:
         print("Made Controller")
 
     def makeMaze(self):
-        print("Making maze")
         mazeGen = MazeGenerator.MazeGenerator(self.size, self.size)
-        self.maze = mazeGen.genMaze((0, 0))
+        self.maze = mazeGen.make_empty_maze()
+        self.maze = mazeGen.genMaze(self.maze,(0, 0))
         self.maze[len(self.maze)-1][len(self.maze)-2] = '2'  # Sets lower right corner to goal
         self.maze[0][1] = '0'  # Sets upper left wallpoint to start
         # printToFile(maze)
