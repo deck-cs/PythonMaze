@@ -1,6 +1,6 @@
 import time
 class MazeSolver:
-    def __init__ (self, maze):  #also add solved methods when ready
+    def __init__(self, maze):  # also add solved methods when ready
         self.maze = maze
 
         self.solvedTimesList = []
@@ -10,8 +10,9 @@ class MazeSolver:
         if maze[x][y] == '2':
             print('found at %d,%d' % (x, y))
             end = time.time()
-            print('\n'.join([''.join(['{:4}'.format(item) for item in row])for row in maze]))
-            #print('\n'.join([''.join(['{:4}'.format(item) for item in row])
+            print(
+                '\n'.join([''.join(['{:4}'.format(item) for item in row])for row in maze]))
+            # print('\n'.join([''.join(['{:4}'.format(item) for item in row])
             #                 for row in maze]))
             timeUsed = end - startTime
             print("Time used:" + " " + str((timeUsed)))
@@ -38,4 +39,3 @@ class MazeSolver:
                 or (y < len(maze)-1 and self.search(x, y+1, maze, startTime))):
             return True
         return False
-
