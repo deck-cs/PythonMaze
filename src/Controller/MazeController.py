@@ -11,7 +11,7 @@ class MazeController:
         self.size = size
         self.solvedTimesList = []
         self.pvList = []
-        self.maze = []
+        self.maze = {}
         print("Made Controller")
 
     def makeMaze(self):

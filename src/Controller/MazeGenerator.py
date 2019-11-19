@@ -7,7 +7,7 @@ class MazeGenerator:
         self.sizeX = sizeX
         self.sizeY = sizeY
        # self.generatorType = generatorType
-        self. maze = {}
+        self.maze = self.make_empty_maze()
 
     # Makes an array, that can be interpreted maze with no walls
     def make_empty_maze(self):
@@ -30,19 +30,18 @@ class MazeGenerator:
     # Generates and returns a maze
 
     def genMaze(self, coords=(0, 0)):
-        maze = self.make_empty_maze()
         coords = self.coords
         directions = [(0, 1), (1, 0), (0, -1), (-1, 0)]
         shuffle(directions)     # Randomizes direction list
         for direction in directions:  # Goes through the list of directions
             new_coords = (coords[0] + direction[0], coords[1] + direction[1])
-            if (0 <= new_coords[0] < len(maze)) and \
-                (0 <= new_coords[1] < len(maze[0])) and \
-                    not maze[new_coords[0]][new_coords[1]]:  # Checks if next space is within maze walls and if visited prior (Can it trap itself here?)
+            if (0 <= new_coords[0] < len(self.maze)) and \
+                (0 <= new_coords[1] < len(self.maze[0])) and \
+                    not self.maze[new_coords[0]][new_coords[1]]:  # Checks if next space is within maze walls and if visited prior (Can it trap itself here?)
                 # Appends upcoming direction for current space
-                maze[coords[0]][coords[1]].append(direction)
-                maze[new_coords[0]][new_coords[1]].append(
+                self.maze[coords[0]][coords[1]].append(direction)
+                self.maze[new_coords[0]][new_coords[1]].append(
                     (-direction[0], -direction[1]))  # Appends direction it came from, for future space
                 self.genMaze(new_coords)  # Recursively calls itself to move on
-        maze = self.convert(maze)
-        return maze
+        self.maze = self.convert(self.maze)
+        return self.maze
