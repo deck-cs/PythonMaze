@@ -170,6 +170,7 @@ def makeMazeAndSolve(size):
     print("places visited = " + str(pv))
     printToFile(maze)
     readFromFile()
+    return maze
 
 def mainRun(size):
     global iteration

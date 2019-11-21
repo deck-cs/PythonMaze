@@ -1,21 +1,21 @@
-import controller
+import controller1
+from Controller import MazeGenerator
 from tkinter import *
 from tkinter import messagebox
 
 root = Tk(className="PythonMaze")
 
 
-
-def MMaS(event):
-    s = controller.makeMazeAndSolve(5)
-    return s
-
-
+def MMaS():
+    MazeText = controller1.makeMazeAndSolve(5)
+    
+    return MazeText
 
 
-widget = Button(None, text='MakeAndSolve')
+
+#MakeAndSolveButton
+widget = Button(None, text='MakeAndSolve', command = MMaS)
 widget.pack()
-widget.bind('<Button-1>', MMaS)
 
 
 #TOPMENU
@@ -64,10 +64,11 @@ w.pack()
 """
 
 
+
 #TEXTBOX - Should it show the same as in terminal?
 T = Text(root, height=20, width=30) 
 T.pack() 
-T.insert(END, MMaS) 
+T.insert(END, MMaS() ) 
 
 
 root.mainloop()
