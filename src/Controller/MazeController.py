@@ -16,10 +16,11 @@ class MazeController:
 
     def makeMaze(self):
         mazeGen = MazeGenerator.MazeGenerator(self.size, self.size)
-        self.maze = mazeGen.make_empty_maze()
-        self.maze = mazeGen.genMaze(self.maze,(0, 0))
-        self.maze[len(self.maze)-1][len(self.maze)-2] = '2'  # Sets lower right corner to goal
-        self.maze[0][1] = '0'  # Sets upper left wallpoint to start
+        maze = mazeGen.make_empty_maze()
+        maze = mazeGen.genMaze(maze,(0, 0))
+        maze[len(self.maze)-1][len(maze)-2] = '2'  # Sets lower right corner to goal
+        maze[0][1] = '0'  # Sets upper left wallpoint to start
+        return maze
         # printToFile(maze)
         # readFromFile()
 
@@ -28,3 +29,10 @@ class MazeController:
         mazeSolver = MazeSolver.MazeSolver(self.maze)
         mazeSolver.search(0, 1, self.maze, startTime)
         self.pvList.append(mazeSolver.pv)
+        self.solvedTimesList.append(mazeSolver.solvedTimes)
+
+    def makeAndSolve(self):
+        for _ in range(self.amount):
+            self.maze = self.makeMaze()
+            self.solveMaze()
+        print('Finished making mazes size %dx%d' %(self.size,self.size))
