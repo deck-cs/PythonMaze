@@ -25,18 +25,14 @@ class SubController:
             self.getStatValues()
             self.getRelatedValues(mazes.pvList)
             self.getPvListFinal(mazes.pvList)
-            print("Made one labyrint")
         self.makePlots()
 
 
     def makeStatNumbers(self):
-        print("start makeStatNumbers")
         x = 1
         for aTry in self.solvedTimesList:
             self.attempts.setdefault(x, 0)
             self.attempts[x] = aTry
-            print(aTry)
-            print("that was the try info")
             x+=1
 
     def getStatKeys(self):
