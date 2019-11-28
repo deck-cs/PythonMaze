@@ -11,6 +11,6 @@ class MainController:
         c1.makeMazesWithStats()
 
 if __name__ == "__main__":
-    mc = MainController([5,10],5)
+    mc = MainController([5,10,15,20],5)
     mc.runMain()
     print("starting main")
