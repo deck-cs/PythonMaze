@@ -1,4 +1,4 @@
-from Controller import SubController as sCon
+import SubController as sCon
 
 class MainController:
     def __init__(self, sizesList, amount):
@@ -6,5 +6,11 @@ class MainController:
         self.amount = amount
 
     def runMain(self):
+        print("Runing Main")
         c1 = sCon.SubController(self.amount, self.sizesList)
-        c1.makeMazesWithStats
+        c1.makeMazesWithStats()
+
+if __name__ == "__main__":
+    mc = MainController([5,10],5)
+    mc.runMain()
+    print("starting main")

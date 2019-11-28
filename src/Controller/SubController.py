@@ -1,4 +1,4 @@
-from Controller import MazeController as mazeCon
+import MazeController as mazeCon
 import matplotlib.pyplot as plt
 
 class SubController:
@@ -15,21 +15,26 @@ class SubController:
 
 
     def makeMazesWithStats(self):
-        for x in range(self.sizesList):
+        for x in range(len(self.sizesList)):
             mazes = mazeCon.MazeController(self.amount,self.sizesList[x])
             self.iteration = self.sizesList[x]
-            self.makeStatNumbers(mazes.solvedTimesList)
-            self.getStatKeys
-            self.getStatValues
+            self.solvedTimesList = mazes.solvedTimesList
+            self.makeStatNumbers()
+            self.getStatKeys()
+            self.getStatValues()
             self.getRelatedValues(mazes.pvList)
-            self.getPvListFinal
+            self.getPvListFinal(mazes.pvList)
+            print("Made one labyrint")
+        self.makePlots()
 
 
-    def makeStatNumbers(self, solvedTimesList):
+    def makeStatNumbers(self):
         x = 1
         for aTry in self.solvedTimesList:
             self.attempts.setdefault(x, 0)
             self.attempts[x] = aTry
+            print(aTry)
+            print("that was the try info")
             x+=1
 
     def getStatKeys(self):

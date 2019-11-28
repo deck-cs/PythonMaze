@@ -1,5 +1,5 @@
-from Controller import MazeGenerator
-from Controller import MazeSolver
+import MazeGenerator
+import MazeSolver
 import time
 import sys
 
