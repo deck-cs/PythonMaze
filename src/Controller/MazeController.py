@@ -2,6 +2,7 @@ import MazeGenerator
 import MazeSolver
 import time
 import sys
+import threading
 
 
 class MazeController:
@@ -12,6 +13,7 @@ class MazeController:
         self.solvedTimesList = []
         self.pvList = []
         self.maze = {}
+        self.threadsMax = threading.Semaphore(3)
         print("Made Controller")
 
     def makeMaze(self):
@@ -36,3 +38,12 @@ class MazeController:
             self.maze = self.makeMaze()
             self.solveMaze()
         print('Finished making mazes size %dx%d' %(self.size,self.size))
+
+    def threadedMakeAndSolve(self):
+        threads = list()
+        for index in range(self.threadsMax):
+            print("Creating and starting thread %d", index)
+            x = threading.BoundedSemaphore(self.threadsMax)
+            x.acquire()
+            threads.append(x)
+            x.start()
