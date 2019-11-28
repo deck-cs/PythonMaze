@@ -17,6 +17,7 @@ class SubController:
     def makeMazesWithStats(self):
         for x in range(len(self.sizesList)):
             mazes = mazeCon.MazeController(self.amount,self.sizesList[x])
+            mazes.makeAndSolve()
             self.iteration = self.sizesList[x]
             self.solvedTimesList = mazes.solvedTimesList
             self.makeStatNumbers()
@@ -24,7 +25,6 @@ class SubController:
             self.getStatValues()
             self.getRelatedValues(mazes.pvList)
             self.getPvListFinal(mazes.pvList)
-            print("Made one labyrint")
         self.makePlots()
 
 
@@ -33,8 +33,6 @@ class SubController:
         for aTry in self.solvedTimesList:
             self.attempts.setdefault(x, 0)
             self.attempts[x] = aTry
-            print(aTry)
-            print("that was the try info")
             x+=1
 
     def getStatKeys(self):

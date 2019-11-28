@@ -6,11 +6,9 @@ class MainController:
         self.amount = amount
 
     def runMain(self):
-        print("Runing Main")
         c1 = sCon.SubController(self.amount, self.sizesList)
         c1.makeMazesWithStats()
 
 if __name__ == "__main__":
-    mc = MainController([5,10],5)
+    mc = MainController([5,10,15,20],5)
     mc.runMain()
-    print("starting main")
