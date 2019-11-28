@@ -1,9 +1,9 @@
 from Controller import MazeController as mazeCon
 
 class SubController:
-    def __init__(self, amount, sizes):
+    def __init__(self, amount, sizesList):
         self.amount = amount
-        self.sizes = sizes
+        self.sizesList = sizesList
         self.solvedTimesList = []
         self.attempts = {}
         self.tryList = []
@@ -14,10 +14,14 @@ class SubController:
 
 
     def makeMazesWithStats(self):
-        for x in range(self.sizes):
-            mazes = mazeCon.MazeController(self.amount,self.sizes[x])
+        for x in range(self.sizesList):
+            mazes = mazeCon.MazeController(self.amount,self.sizesList[x])
+            self.iteration = self.sizesList[x]
             self.makeStatNumbers(mazes.solvedTimesList)
+            self.getStatKeys
+            self.getStatValues
             self.getRelatedValues(mazes.pvList)
+            self.getPvListFinal
 
 
     def makeStatNumbers(self, solvedTimesList):
