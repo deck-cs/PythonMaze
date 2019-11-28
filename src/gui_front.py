@@ -1,6 +1,8 @@
 import tkinter as tk
 from tkinter import *
 CheckVar1 = IntVar
+slide_min = 0
+slide_max = 0
 
 # todo fix so it is a list in dropmenu
 mazeGeneratorOptions = ["one", "two", "three"]
@@ -9,6 +11,11 @@ mazeSolverOptions = ["one", "two", "three"]
 ############ CANVAS - Setup ############
 HEIGHT = 600
 WIDTH = 1200
+
+MAZE_SIZE_RELX = 0.25
+MAZE_SIZE_RELY = 0.15
+WIDGET_SIZE_RELWIDTH = 0.6
+WIDGET_SIZE_RELHEIGHT = 0.08
 
 root = tk.Tk()
 root.title('The amazing MAZE solver')
@@ -49,11 +56,26 @@ def helloCallBack(entry):
 # Placeholder function
 
 
+def slide_valueMin(value_slideMin):
+    global slide_min
+    slide_min = value_slideMin
+    print("slide_valueMin: ", value_slideMin)
+
+
+def slide_valueMax(value_slideMax):
+    global slide_max
+    slide_max = value_slideMax
+    print("slide_valueMax: ", value_slideMax)
+
+
 def setMazeData():
-    a = entry_MazeSizeX.get()
-    b = entry_MazeSizeY.get()
-    c = entry_SolveItterations.get()
-    print('Button set maze data, data is:', a, b, c)
+    # a = entry_MazeSizeX.get()
+    # b = entry_MazeSizeY.get()
+    c = spinbox_SolveItterations.get()
+    d = slide_min
+    e = slide_max
+    print('Button set maze data, data is:', a,
+          b, c, "min size: ", d, "max size: ", e)
 
 
 def saveMazeCheckbox(IntVar):
@@ -81,19 +103,31 @@ variable.set("Choose Maze Generator")  # default value
 dropDown_chooseMazeGenerator = OptionMenu(
     right_frame, variable, mazeGeneratorOptions)
 dropDown_chooseMazeGenerator.place(
-    relx=0.2, rely=0.25, relwidth=0.6, relheight=0.1)
+    relx=0.2, rely=0.25, relwidth=WIDGET_SIZE_RELWIDTH, relheight=0.1)
 
 variable2 = StringVar()
 variable2.set("Choose Maze Solver")  # default value
 dropDown_chooseMazeGenerator = OptionMenu(
     right_frame, variable2, "one", "two", "three")
 dropDown_chooseMazeGenerator.place(
-    relx=0.2, rely=0.4, relwidth=0.6, relheight=0.1)
+    relx=0.2, rely=0.4, relwidth=WIDGET_SIZE_RELWIDTH, relheight=0.1)
 
 ############ MAZE PRINT IN MIDDLE ############
 
 maze_label = tk.Label(lower_frame, text="MAZE IS GOING TO BE HERE")
 maze_label.place(relwidth=1, relheight=1)
+
+############ SCALE SLIDER ############
+
+minMazeSize_scale = tk.Scale(left_frame, orient='horizontal', from_=5,
+                             to=35, resolution=5, command=slide_valueMin)
+minMazeSize_scale.place(relx=MAZE_SIZE_RELX, rely=0.44, relwidth=WIDGET_SIZE_RELWIDTH,
+                        relheight=WIDGET_SIZE_RELHEIGHT)
+
+maxMazeSize_scale = tk.Scale(left_frame, orient='horizontal', from_=5,
+                             to=35, resolution=5, command=slide_valueMax)
+maxMazeSize_scale.place(relx=MAZE_SIZE_RELX, rely=0.60, relwidth=WIDGET_SIZE_RELWIDTH,
+                        relheight=WIDGET_SIZE_RELHEIGHT)
 
 ############ CHECKBOX ############
 
@@ -104,24 +138,32 @@ checkbox_saveData.place(relx=0.5, relwidth=0.25, relheight=1)
 ############ INPUTS // ENTRY ############
 
 
-entry_MazeSizeX = tk.Entry(left_frame, bd=1)
-entry_MazeSizeX.insert(0, 'Length of maze')
-entry_MazeSizeX.place(relx=0.1, rely=0.25, relwidth=0.6, relheight=0.1)
+# entry_MazeSizeX = tk.Entry(left_frame, bd=1)
+# entry_MazeSizeX.insert(0, 'Length of maze')
+# entry_MazeSizeX.place(relx=0.1, rely=0.25, relwidth=0.6, relheight=0.06)
 
-entry_MazeSizeY = tk.Entry(left_frame, bd=1)
-entry_MazeSizeY.insert(0, 'Hight of maze')
-entry_MazeSizeY.place(relx=0.1, rely=0.35, relwidth=0.6, relheight=0.1)
+# entry_MazeSizeY = tk.Entry(left_frame, bd=1)
+# entry_MazeSizeY.insert(0, 'Hight of maze')
+# entry_MazeSizeY.place(relx=0.1, rely=0.35, relwidth=0.6, relheight=0.06)
 
-entry_SolveItterations = tk.Entry(left_frame, bd=1)
-entry_SolveItterations.insert(0, 'How many time to solve?')
-entry_SolveItterations.place(relx=0.1, rely=0.45, relwidth=0.6, relheight=0.1)
+# entry_SolveItterations = tk.Entry(left_frame, bd=1)
+# entry_SolveItterations.insert(0, 'How many time to solve?')
+# entry_SolveItterations.place(relx=0.1, rely=0.2, relwidth=0.6, relheight=0.06)
+
+spinbox_SolveItterations = tk.Spinbox(left_frame, from_=0, to=40)
+spinbox_SolveItterations.place(
+    relx=MAZE_SIZE_RELX, rely=0.3, relwidth=WIDGET_SIZE_RELWIDTH, relheight=WIDGET_SIZE_RELHEIGHT)
 
 
 ############ LABELS ############
 
-# label_info1 = tk.Label(
-#     root, text='This is a demo text"\n"Which should contain instructions for fiels below', font=('helvetica', 10))
-# canvas.create_window(90, 100, window=label_info1)
+left_label = tk.Label(left_frame, text='Select minimum size of maze')
+left_label.place(relx=MAZE_SIZE_RELX, rely=0.38, relwidth=WIDGET_SIZE_RELWIDTH,
+                 relheight=WIDGET_SIZE_RELHEIGHT)
+
+left_label = tk.Label(left_frame, text='Select maximum size of maze')
+left_label.place(relx=MAZE_SIZE_RELX, rely=0.54, relwidth=WIDGET_SIZE_RELWIDTH,
+                 relheight=WIDGET_SIZE_RELHEIGHT)
 
 # left_label = tk.Label(left_frame, bg='blue', text='LEFT LABEL FRAME')
 # left_label.place(relwidth=1, relheight=0.2)
@@ -138,7 +180,8 @@ buttonStartMaze.place(relx=0.19, relwidth=0.3, relheight=1)
 
 buttonStartMaze = tk.Button(left_frame, text='Set data', bd=5,
                             command=lambda: setMazeData())
-buttonStartMaze.place(relx=0.25, rely=0.1, relwidth=0.3, relheight=0.1)
+buttonStartMaze.place(relx=MAZE_SIZE_RELX, rely=MAZE_SIZE_RELY,
+                      relwidth=WIDGET_SIZE_RELWIDTH, relheight=0.1)
 
 ############ Main Loop ############
 root.mainloop()
