@@ -1,6 +1,7 @@
+# from Controller import MainController as mc
 import tkinter as tk
-from tkinter import *
-CheckVar1 = IntVar
+# from tkinter import *
+CheckVar1 = tk.IntVar
 slide_min = 0
 slide_max = 0
 
@@ -88,7 +89,7 @@ def load_mazeList():
 
     i = 1
     for m in Mazes:
-        Lb1.insert(tk.END, "Maze number: " + str(i))
+        Lb1.insert(tk.END, "Maze number: " + str(i) + " - Maze: " + str(m))
         i += 1
     Lb1.place(relwidth=1, relheight=1)
     scroolbar.config(command=Lb1.yview)
@@ -107,11 +108,11 @@ def slide_valueMax(value_slideMax):
 
 
 def setMazeData():
-    c = spinbox_SolveItterations.get()
-    d = slide_min
-    e = slide_max
+    a = spinbox_SolveItterations.get()
+    b = slide_min
+    c = slide_max
     print('Button set maze data, data is:',
-          c, "min size: ", d, "max size: ", e)
+          a, "min size: ", b, "max size: ", c)
 
 
 def saveMazeCheckbox(IntVar):
@@ -119,8 +120,12 @@ def saveMazeCheckbox(IntVar):
 
 
 def startMazeSolve():
+    a = spinbox_SolveItterations.get()
+    b = slide_min
+    c = slide_max
     print('Button: maze solve start pushed')
     load_mazeList()
+    mc.MainController([a, b], c)
 
 
 def TBD():
@@ -135,16 +140,16 @@ def MazeVar():
 ############ DropDown Menu ############
 
 
-variable = StringVar()
+variable = tk.StringVar()
 variable.set("Choose Maze Generator")  # default value
-dropDown_chooseMazeGenerator = OptionMenu(
+dropDown_chooseMazeGenerator = tk.OptionMenu(
     right_frame, variable, mazeGeneratorOptions)
 dropDown_chooseMazeGenerator.place(
     relx=0.2, rely=0.02, relwidth=WIDGET_SIZE_RELWIDTH, relheight=0.1)
 
-variable2 = StringVar()
+variable2 = tk.StringVar()
 variable2.set("Choose Maze Solver")  # default value
-dropDown_chooseMazeGenerator = OptionMenu(
+dropDown_chooseMazeGenerator = tk.OptionMenu(
     right_frame, variable2, "one", "two", "three")
 dropDown_chooseMazeGenerator.place(
     relx=0.2, rely=0.13, relwidth=WIDGET_SIZE_RELWIDTH, relheight=0.1)
@@ -168,7 +173,7 @@ maxMazeSize_scale.place(relx=MAZE_SIZE_RELX, rely=0.60, relwidth=WIDGET_SIZE_REL
 
 ############ CHECKBOX ############
 
-checkbox_saveData = tk.Checkbutton(top_frame, text="Save data to file", command=lambda: saveMazeCheckbox(IntVar),
+checkbox_saveData = tk.Checkbutton(top_frame, text="Save data to file", command=lambda: saveMazeCheckbox(tk.IntVar),
                                    variable=CheckVar1, onvalue=1, offvalue=0, height=5, width=15)
 checkbox_saveData.place(relx=0.5, rely=0.6, relwidth=0.3, relheight=0.25)
 
@@ -181,7 +186,7 @@ spinbox_SolveItterations.place(
 ############ LISTBOX ############
 
 scroolbar = tk.Scrollbar(listbox_frame)
-Lb1 = Listbox(listbox_frame, yscrollcommand=scroolbar.set)
+Lb1 = tk.Listbox(listbox_frame, yscrollcommand=scroolbar.set)
 
 ############ LABELS ############
 

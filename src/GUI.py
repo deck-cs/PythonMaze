@@ -1,7 +1,7 @@
 import controller1
-from Controller import MazeGenerator
+from .Controller import MazeGenerator
 from tkinter import *
-from tkinter import messagebox
+# from tkinter import messagebox
 
 root = Tk(className="PythonMaze")
 
