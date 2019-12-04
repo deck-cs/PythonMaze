@@ -1,12 +1,13 @@
 import unittest
-from src.Controller.MazeGenerator import MazeGenerator
-from src.Controller.MazeSolver import MazeSolver
+import Controller.MazeSolver
+import Controller.MazeGenerator as mG
 
 
 class solveMazeTest(unittest.TestCase):
+    #Tror den mangler en init?
 
     def test_placeVisited(self):
-        maze = MazeGenerator.genMaze
+        maze = mG.MazeGenerator.genMaze()
 
 
 class TestSum(unittest.TestCase):

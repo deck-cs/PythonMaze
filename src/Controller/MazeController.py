@@ -43,7 +43,7 @@ class MazeController:
         threads = list()
         for index in range(self.threadsMax):
             print("Creating and starting thread %d", index)
-            x = threading.BoundedSemaphore(self.threadsMax)
+            x = threading
             x.acquire()
             threads.append(x)
             x.start()
