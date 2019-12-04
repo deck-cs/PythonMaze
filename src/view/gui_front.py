@@ -1,4 +1,4 @@
-# from Controller import MainController as mc
+from src.Controllerpygame import MainController as mc
 import tkinter as tk
 # from tkinter import *
 CheckVar1 = tk.IntVar
