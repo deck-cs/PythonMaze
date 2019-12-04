@@ -8,6 +8,7 @@ theTimes = {}
 relatedValues = {}
 pvList = []
 
+
 def makePlot():
     fig1, ax1 = plt.subplots()
     plt.xticks(rotation=45)
@@ -15,7 +16,7 @@ def makePlot():
     # bar(x-vals, y-vals, bar width, align bar relative to x-val on x-axis) )
     ax1.bar(tryList, theTimes, width=0.5, align='center')
     ax2 = ax1.twinx()
-    ax2.bar(tryList, pvList, width=0.3, align='edge',color='orange')
+    ax2.bar(tryList, pvList, width=0.3, align='edge', color='orange')
     ax2.set_ylabel('Attempts', color='tab:orange')
     ax2.tick_params(axis='y')
     # plt.ticklabel_format(useOffset=False)
@@ -29,10 +30,12 @@ def makePlot():
     plt.xticks(rotation=45)
     plt.title("Time over places visited")
     plt.xlabel("Attempt", fontsize=10)
-    ax3.bar(tryList, relatedValues, width = 0.3, align='center')
+    ax3.bar(tryList, relatedValues, width=0.3, align='center')
     ax3.set_ylabel('Time pr. move', color='tab:red')
     ax3.tick_params(axis='y')
     plt.show()
+
+
 """
 for x in range(2):  #The range is how many 
     cntr.mainRun((x+1)*5)   #Scales each iteration by 5
@@ -57,6 +60,6 @@ print("placesV")
 makePlot()
 """
 print("Trying")
-maze = test.MazeController(1,5)
+maze = test.MazeController(1, 5)
 maze.makeMaze()
 maze.solveMaze()
