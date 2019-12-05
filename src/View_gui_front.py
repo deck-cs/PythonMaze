@@ -1,4 +1,4 @@
-import Controller.MainController as mc
+import Controller_MainController as mc
 import tkinter as tk
 # from tkinter import *
 CheckVar1 = tk.IntVar
