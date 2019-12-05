@@ -1,6 +1,4 @@
 import time
-
-
 class MazeSolver:
     def __init__(self, maze):  # also add solved methods when ready
         self.maze = maze

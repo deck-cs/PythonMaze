@@ -57,7 +57,6 @@ class MazeController:
                 executor.map(self.solveMazeThread())
         return self.mazes
 
-
     def makeMazeThread(self):
         print("Making maze")
         mazeGen = Controller_MazeGenerator.MazeGenerator(self.size, self.size)

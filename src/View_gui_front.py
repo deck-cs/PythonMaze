@@ -4,15 +4,19 @@ import tkinter as tk
 CheckVar1 = tk.IntVar
 slide_min = 0
 slide_max = 0
+mazesArray = []
+
 
 # todo fix so it is a list in dropmenu
 mazeGeneratorOptions = ["one", "two", "three"]
 mazeSolverOptions = ["one", "two", "three"]
-Mazes = ["one", "two", "three", "four", "five", "six"]
+Mazes = []
 
 ############ CANVAS - Setup ############
 HEIGHT = 700
 WIDTH = 1400
+MAZE_HEIGHT = 350
+MAZE_WIDTH = 500
 
 MAZE_SIZE_RELX = 0.25
 MAZE_SIZE_RELY = 0.15
@@ -50,18 +54,65 @@ top_frame = tk.Frame(root, bg='grey', bd='5')
 top_frame.place(relx=0.5, rely=0, relwidth=TOP_FRAME_SIZE,
                 relheight=0.25, anchor='n')
 
-lower_frame = tk.Frame(root, bg='black', bd='10')
+lower_frame = tk.Canvas(root, bg='white')
 lower_frame.place(relx=0.5, rely=0.25, relwidth=LOWER_FRAME_SIZE,
                   relheight=0.75, anchor='n')
 
-lower_label = tk.Label(lower_frame)
-lower_label.place(relwidth=1, relheight=1)
+# lower_label = tk.Label(lower_frame)
+# lower_label.place(relwidth=1, relheight=1)
 
 listbox_frame = tk.Frame(right_frame)
 listbox_frame.place(relx=0.2, rely=0.4,
                     relwidth=WIDGET_SIZE_RELWIDTH, relheight=0.50)
 
 ############ FUNCTIONS ############
+
+
+def draw_maze(selected_maze):
+    print("Draw maze started")
+
+    for y in range(len(selected_maze)):
+        for x in range(len(selected_maze[y])):
+            # Get the character at each x,y coordinate
+            # NOTE the order of y and x in the next line
+            character = selected_maze[y][x]
+            # Calculate the screen x, y coordinates
+            CUBE_SIZE = 25
+            screen_x = (x * CUBE_SIZE)
+            screen_y = (y * CUBE_SIZE)
+
+            # Check if it is an 0 (representing a wall)
+            if character == "0":
+                lower_frame.create_rectangle(
+                    screen_x, screen_y, screen_x+CUBE_SIZE, screen_y+CUBE_SIZE, fill="white", outline="black")
+                print(str(character), screen_x,
+                      screen_y, screen_x+CUBE_SIZE, screen_y+CUBE_SIZE)
+            # Check if it is an 1 (representing a wall)
+            if character == "1":
+                # lower_frame.create_rectangle(
+                #     screen_x, screen_y, 24, 24, fill="white")
+                lower_frame.create_rectangle(
+                    screen_x, screen_y, screen_x+CUBE_SIZE, screen_y+CUBE_SIZE, fill="black", outline="white")
+                print(str(character), screen_x,
+                      screen_y, screen_x+CUBE_SIZE, screen_y+CUBE_SIZE)
+                # lower_frame.pack()
+            # Check if it is an 2 (representing a wall)
+            if character == "2":
+                lower_frame.create_rectangle(
+                    screen_x, screen_y, screen_x+CUBE_SIZE, screen_y+CUBE_SIZE, fill="green", outline="white")
+                print(str(character), screen_x,
+                      screen_y, screen_x+CUBE_SIZE, screen_y+CUBE_SIZE)
+                # lower_frame.pack()
+            # Check if it is an 3 (representing a wall)
+            if character == "3":
+                lower_frame.create_rectangle(
+                    screen_x, screen_y, screen_x+CUBE_SIZE, screen_y+CUBE_SIZE, fill="blue", outline="white")
+                print(str(character), screen_x,
+                      screen_y, screen_x+CUBE_SIZE, screen_y+CUBE_SIZE)
+                # lower_frame.pack()
+    print("maze_draw done")
+
+    lower_frame.place(lower_frame, anchor='n')
 
 
 def mazeSelect():
@@ -71,25 +122,24 @@ def mazeSelect():
         for value in selected:
             maze_number = value
         print("Maze selected: " + str(maze_number))
+        draw_maze(mazesArray[maze_number])
     else:
         load_mazeList()
-
-
-def helloCallBack(entry):
-    print("This is the entry:", entry)
-    # msg = messagebox.showinfo("CheckVar", CheckVar1.get())
 
 # Placeholder function
 
 
-def load_mazeList():
+def load_mazeList(mazesArray):
     global Mazes
+    # mc1 = mc.MainController()
+    # mazesArray = mc.MainController.getMazes()
+    for maze in mazesArray:
+        Mazes.append(maze)
     Lb1.delete(0, tk.END)
-    # TODO insert function here that loads file
-
     i = 1
     for m in Mazes:
-        Lb1.insert(tk.END, "Maze number: " + str(i) + " - Maze: " + str(m))
+        Lb1.insert(tk.END, "Maze number: " + str(i))
+        m
         i += 1
     Lb1.place(relwidth=1, relheight=1)
     scroolbar.config(command=Lb1.yview)
@@ -111,7 +161,7 @@ def setMazeData():
     a = spinbox_SolveItterations.get()
     b = slide_min
     c = slide_max
-    print('Button set maze data, data is:',
+    print('Button set selected_maze data, data is:',
           a, "min size: ", b, "max size: ", c)
 
 
@@ -124,9 +174,11 @@ def startMazeSolve():
     b = int(slide_max)
     c = int(spinbox_SolveItterations.get())
     print('Button: maze solve start pushed')
-    load_mazeList()
-    mazes = mc.MainController([a, b], c)
-    mazes.runMain()
+    mCon = mc.MainController([a, b], c)
+    mCon.runMain()
+    mazesArray = mCon.getMazes()
+    print(mazesArray)
+    load_mazeList(mazesArray)
 
 
 def TBD():
@@ -155,11 +207,6 @@ dropDown_chooseMazeGenerator = tk.OptionMenu(
 dropDown_chooseMazeGenerator.place(
     relx=0.2, rely=0.13, relwidth=WIDGET_SIZE_RELWIDTH, relheight=0.1)
 
-############ MAZE PRINT IN MIDDLE ############
-
-maze_label = tk.Label(lower_frame, text="MAZE IS GOING TO BE HERE")
-maze_label.place(relwidth=1, relheight=1)
-
 ############ SCALE SLIDER ############
 
 minMazeSize_scale = tk.Scale(left_frame, orient='horizontal', from_=5,
@@ -180,7 +227,7 @@ checkbox_saveData.place(relx=0.5, rely=0.6, relwidth=0.3, relheight=0.25)
 
 ############ SPINBOX ############
 
-spinbox_SolveItterations = tk.Spinbox(left_frame, from_=0, to=40)
+spinbox_SolveItterations = tk.Spinbox(left_frame, from_=1, to=40)
 spinbox_SolveItterations.place(
     relx=MAZE_SIZE_RELX, rely=0.3, relwidth=WIDGET_SIZE_RELWIDTH, relheight=WIDGET_SIZE_RELHEIGHT)
 
