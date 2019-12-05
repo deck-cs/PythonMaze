@@ -13,7 +13,7 @@ class MainController:
         global mazesArray
         c1 = sCon.SubController(self.amount, self.sizesList)
         c1.makeMazesWithStats()
-        mazesArray = c1.loadFromJSON()
+        mazesArray = c1.loadFromJSON("Mazes")
 
     def getMazes(self):
         print("From Controller_MainController.getMazes")

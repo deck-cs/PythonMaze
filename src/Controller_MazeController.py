@@ -51,9 +51,9 @@ class MazeController:
     def threadedMakeAndSolve(self):
         print("Starting with threads")
         with conFu.ThreadPoolExecutor(max_workers=self.threadsMax) as executor:
-            for x in range(self.amount):
+            for _ in range(self.amount):
                 executor.map(self.makeMazeThread())
-            for x in range(self.amount):
+            for _ in range(self.amount):
                 executor.map(self.solveMazeThread())
         return self.mazes
 

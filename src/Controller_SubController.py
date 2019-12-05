@@ -29,14 +29,14 @@ class SubController:
             self.getRelatedValues(mazes.pvList)
             self.getPvListFinal(mazes.pvList)
         self.makePlots()
-        self.saveToJSON()
+        self.saveToJSON("Mazes")
 
-    def saveToJSON(self):
-        with open("data_file.json", "w") as write_file:
+    def saveToJSON(self, filename):
+        with open(filename+'.json', "w") as write_file:
             json.dump(self.mazesArray, write_file)
 
-    def loadFromJSON(self):
-        with open('data_file.json') as f:
+    def loadFromJSON(self, filename):
+        with open(filename+'.json') as f:
             self.mazesArray = json.load(f)
             return self.mazesArray
 
