@@ -35,10 +35,13 @@ class MazeController:
         self.solvedTimesList.append(mazeSolver.solvedTimes)
 
     def makeAndSolve(self):
+        mazes = []
         for _ in range(self.amount):
             self.maze = self.makeMaze()
             self.solveMaze()
+            mazes.append(self.maze)
         print('Finished making mazes size %dx%d' % (self.size, self.size))
+        return mazes
 
     def threadedMakeAndSolve(self):
         threads = list()

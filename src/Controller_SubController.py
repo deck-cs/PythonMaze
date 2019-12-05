@@ -12,6 +12,7 @@ class SubController:
         self.theTimes = []
         self.relatedValues = []
         self.pvListFinal = []
+        self.mazesArray = []
 
 
     def makeMazesWithStats(self):
