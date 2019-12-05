@@ -1,5 +1,7 @@
 import Controller_MazeController as mazeCon
 import matplotlib.pyplot as plt
+import json
+
 
 class SubController:
     def __init__(self, amount, sizesList):
@@ -14,11 +16,10 @@ class SubController:
         self.pvListFinal = []
         self.mazesArray = []
 
-
     def makeMazesWithStats(self):
         for x in range(len(self.sizesList)):
-            mazes = mazeCon.MazeController(self.amount,self.sizesList[x])
-            mazes.makeAndSolve()
+            mazes = mazeCon.MazeController(self.amount, self.sizesList[x])
+            self.mazesArray.append(mazes.makeAndSolve())
             self.iteration = self.sizesList[x]
             self.solvedTimesList = mazes.solvedTimesList
             self.makeStatNumbers()
@@ -27,36 +28,42 @@ class SubController:
             self.getRelatedValues(mazes.pvList)
             self.getPvListFinal(mazes.pvList)
         self.makePlots()
+        self.saveToJSON()
 
+    def saveToJSON(self):
+        with open("data_file.json", "w") as write_file:
+            json.dump(self.mazesArray, write_file)
 
     def makeStatNumbers(self):
         x = 1
         for aTry in self.solvedTimesList:
             self.attempts.setdefault(x, 0)
             self.attempts[x] = aTry
-            x+=1
+            x += 1
 
     def getStatKeys(self):
         min = "min"
-        min+=str(self.iteration)
+        min += str(self.iteration)
         avg = "avg"
-        avg+=str(self.iteration)
+        avg += str(self.iteration)
         max = "max"
-        max+= str(self.iteration)
+        max += str(self.iteration)
         self.tryList.append(min)
         self.tryList.append(avg)
         self.tryList.append(max)
 
     def getStatValues(self):
         self.theTimes.append(min(list(self.attempts.values())))
-        self.theTimes.append(sum(list(self.attempts.values()))/len(list(self.attempts.values())))
+        self.theTimes.append(
+            sum(list(self.attempts.values()))/len(list(self.attempts.values())))
         self.theTimes.append(max(list(self.attempts.values())))
 
     def getRelatedValues(self, pvList):
         solveList = list(self.attempts.values())
         minKey = min(self.attempts, key=self.attempts.get)-1
         self.relatedValues.append(min(solveList)/pvList[minKey])
-        self.relatedValues.append((sum(solveList)/len(solveList))/((sum(pvList)/len(pvList))))
+        self.relatedValues.append(
+            (sum(solveList)/len(solveList))/((sum(pvList)/len(pvList))))
         maxKey = max(self.attempts, key=self.attempts.get)-1
         self.relatedValues.append(min(solveList)/pvList[maxKey])
 
@@ -72,7 +79,8 @@ class SubController:
         # bar(x-vals, y-vals, bar width, align bar relative to x-val on x-axis) )
         ax1.bar(self.tryList, self.theTimes, width=0.5, align='center')
         ax2 = ax1.twinx()
-        ax2.bar(self.tryList, self.pvListFinal, width=0.3, align='edge',color='orange')
+        ax2.bar(self.tryList, self.pvListFinal,
+                width=0.3, align='edge', color='orange')
         ax2.set_ylabel('Attempts', color='tab:orange')
         ax2.tick_params(axis='y')
         # plt.ticklabel_format(useOffset=False)
@@ -86,7 +94,7 @@ class SubController:
         plt.xticks(rotation=45)
         plt.title("Time over places visited")
         plt.xlabel("Attempt", fontsize=10)
-        ax3.bar(self.tryList, self.relatedValues, width = 0.3, align='center')
+        ax3.bar(self.tryList, self.relatedValues, width=0.3, align='center')
         ax3.set_ylabel('Time pr. move', color='tab:red')
         ax3.tick_params(axis='y')
         plt.show()
