@@ -120,12 +120,13 @@ def saveMazeCheckbox(IntVar):
 
 
 def startMazeSolve():
-    a = spinbox_SolveItterations.get()
-    b = slide_min
-    c = slide_max
+    a = int(slide_min)
+    b = int(slide_max)
+    c = int(spinbox_SolveItterations.get())
     print('Button: maze solve start pushed')
     load_mazeList()
-    mc.MainController([a, b], c)
+    mazes = mc.MainController([a, b], c)
+    mazes.runMain()
 
 
 def TBD():

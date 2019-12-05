@@ -1,4 +1,4 @@
-import MazeController as mazeCon
+import Controller_MazeController as mazeCon
 import matplotlib.pyplot as plt
 
 class SubController:
