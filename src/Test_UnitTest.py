@@ -56,6 +56,7 @@ class TestSum(unittest.TestCase):
         sc.loadFromJSON("test")
         self.assertEqual(
             sc.mazesArray[0][1], '0', "Checking that the maze exists and has a start")
+        os.remove('test.json')  # deleting the file again
 
 
 if __name__ == '__main__':
