@@ -58,6 +58,9 @@ class SubController:
         self.tryList.append(avg)
         self.tryList.append(max)
 
+    def getMazes(self):
+        return self.mazesArray
+
     def getStatValues(self):
         self.theTimes.append(min(list(self.attempts.values())))
         self.theTimes.append(

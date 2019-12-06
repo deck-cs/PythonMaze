@@ -2,15 +2,14 @@ import Controller_MainController as mc
 import tkinter as tk
 # from tkinter import *
 CheckVar1 = tk.IntVar
-slide_min = 0
-slide_max = 0
-mazesArray = []
-
+slide_min = 5
+slide_max = 5
 
 # todo fix so it is a list in dropmenu
 mazeGeneratorOptions = ["one", "two", "three"]
 mazeSolverOptions = ["one", "two", "three"]
 Mazes = []
+mazesList = []
 
 ############ CANVAS - Setup ############
 HEIGHT = 700
@@ -122,24 +121,25 @@ def mazeSelect():
         for value in selected:
             maze_number = value
         print("Maze selected: " + str(maze_number))
-        draw_maze(mazesArray[maze_number])
+        print(mazesList[0][0])
+        draw_maze(mazesList[maze_number][0])
     else:
-        load_mazeList()
+        mc1 = mc.MainController(0, 0)
+        load_mazeList(mc1.getMazes())
 
 # Placeholder function
 
 
 def load_mazeList(mazesArray):
     global Mazes
-    # mc1 = mc.MainController()
-    # mazesArray = mc.MainController.getMazes()
+    global mazesList
+    mazesList = mazesArray
     for maze in mazesArray:
         Mazes.append(maze)
     Lb1.delete(0, tk.END)
     i = 1
     for m in Mazes:
         Lb1.insert(tk.END, "Maze number: " + str(i))
-        m
         i += 1
     Lb1.place(relwidth=1, relheight=1)
     scroolbar.config(command=Lb1.yview)
@@ -177,7 +177,6 @@ def startMazeSolve():
     mCon = mc.MainController([a, b], c)
     mCon.runMain()
     mazesArray = mCon.getMazes()
-    print(mazesArray)
     load_mazeList(mazesArray)
 
 

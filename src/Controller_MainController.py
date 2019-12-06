@@ -7,20 +7,18 @@ class MainController:
     def __init__(self, sizesList, amount):
         self.sizesList = sizesList
         self.amount = amount
+        self.c1 = sCon.SubController(self.amount, self.sizesList)
         self.mazesArray = []
 
     def runMain(self):
-        global mazesArray
-        c1 = sCon.SubController(self.amount, self.sizesList)
-        c1.makeMazesWithStats()
-        mazesArray = c1.loadFromJSON("Mazes")
+        self.c1.makeMazesWithStats()
+        self.mazesArray = self.c1.getMazes()
 
     def getMazes(self):
-        print("From Controller_MainController.getMazes")
-        print(self.mazesArray)
+        self.mazesArray = self.c1.loadFromJSON("Mazes")
         return self.mazesArray
 
 
 if __name__ == "__main__":
-    mc = MainController([5], 5)
+    mc = MainController([5, 10], 5)
     mc.runMain()
