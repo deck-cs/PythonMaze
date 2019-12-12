@@ -13,10 +13,11 @@ class TestSum(unittest.TestCase):
         self.assertEqual(len(emptyMaze), 5, "Checks the length of the array")
 
     def test_makeMaze(self):
-        mc = mCon.MazeController(1, 5)
-        maze = mc.makeMaze()
-        self.assertEqual(maze[0][1], '0', "Checking for start of maze")
-        self.assertEqual(maze[10][9], '2', "Checking for end of maze")
+        for _ in range(10):  # running this test multiple times because of its random nature
+            mc = mCon.MazeController(1, 5)
+            maze = mc.makeMaze()
+            self.assertEqual(maze[0][1], '0', "Checking for start of maze")
+            self.assertEqual(maze[10][9], '2', "Checking for end of maze")
 
     def test_solveMaze(self):
         for _ in range(10):  # running this test multiple times because of its random nature
@@ -48,6 +49,24 @@ class TestSum(unittest.TestCase):
         self.assertEqual(
             sc.mazesArray[0][1], '0', "Checking that the maze exists and has a start")
         os.remove('test.json')  # deleting the file again
+
+    def test_exception(self):
+        try:
+            mG.MazeGenerator(-2, -4)
+        except Exception as e:
+            self.assertTrue(True)  # testing if it throws an exception
+        else:
+            self.assertTrue(False)
+
+    def test_exceptionThrow(self):
+        try:
+            sc = sCon.SubController(1, [-1])
+            sc.makeMazesWithStats()
+        except Exception as e:
+            # testing if the exception throwing is working through layers
+            self.assertTrue(True)
+        else:
+            self.assertTrue(False)
 
 
 if __name__ == '__main__':
