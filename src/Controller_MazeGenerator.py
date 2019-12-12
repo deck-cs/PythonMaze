@@ -5,6 +5,8 @@ class MazeGenerator:
     def __init__(self, sizeX, sizeY):
         self.sizeX = sizeX
         self.sizeY = sizeY
+        if(sizeX <= 0 or sizeY <= 0):
+            raise Exception("The size of the maze was 0 or less")
        # self.generatorType = generatorType
         self.maze = self.make_empty_maze()
 
