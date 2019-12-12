@@ -18,9 +18,13 @@ class SubController:
 
     def makeMazesWithStats(self):
         for x in range(len(self.sizesList)):
-            mazes = mazeCon.MazeController(self.amount, self.sizesList[x])
+            try:
+                mazes = mazeCon.MazeController(self.amount, self.sizesList[x])
+            except Exception as e: raise
             # self.mazesArray.append(mazes.makeAndSolve())
-            self.mazesArray.append(mazes.threadedMakeAndSolve())
+            try:
+                self.mazesArray.append(mazes.threadedMakeAndSolve())
+            except Exception as e: raise
             self.iteration = self.sizesList[x]
             self.solvedTimesList = mazes.solvedTimesList
             self.makeStatNumbers()

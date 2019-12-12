@@ -5,21 +5,12 @@ import Controller_SubController as sCon
 import os.path
 
 
-class solveMazeTest(unittest.TestCase):
-    # Tror den mangler en init?
-
-    def test_placeVisited(self):
-        pass
-        # maze = mG.MazeGenerator.genMaze()
-
-
 class TestSum(unittest.TestCase):
 
-    def test_sum(self):
-        self.assertEqual(sum([1, 2, 3]), 6, "Should be 6")
-
-    def test_sum_tuple(self):
-        self.assertEqual(sum((1, 2, 3)), 6, "Should be 6")
+    def test_makeEmptyMaze(self):
+        mazeGen = mG.MazeGenerator(5, 5)
+        emptyMaze = mazeGen.make_empty_maze()
+        self.assertEqual(len(emptyMaze), 5, "Checks the length of the array")
 
     def test_makeMaze(self):
         mc = mCon.MazeController(1, 5)

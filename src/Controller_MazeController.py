@@ -19,10 +19,14 @@ class MazeController:
         self.lock = threading.Lock()
         self.pvLock = threading.Lock()
         self.mazes = []
+        if (self.amount < 1):
+            raise Exception("There must be at least be made one maze pr. size")
         print("Made Controller")
 
     def makeMaze(self):
-        mazeGen = Controller_MazeGenerator.MazeGenerator(self.size, self.size)
+        try:
+            mazeGen = Controller_MazeGenerator.MazeGenerator(self.size, self.size)
+        except Exception as e: raise
         maze = mazeGen.make_empty_maze()
         maze = mazeGen.genMaze(maze, (0, 0))
         # Sets lower right corner to goal
@@ -52,14 +56,18 @@ class MazeController:
         print("Starting with threads")
         with conFu.ThreadPoolExecutor(max_workers=self.threadsMax) as executor:
             for _ in range(self.amount):
-                executor.map(self.makeMazeThread())
+                try:
+                    executor.map(self.makeMazeThread())
+                except Exception as e: raise
             for _ in range(self.amount):
                 executor.map(self.solveMazeThread())
         return self.mazes
 
     def makeMazeThread(self):
         print("Making maze")
-        mazeGen = Controller_MazeGenerator.MazeGenerator(self.size, self.size)
+        try:
+            mazeGen = Controller_MazeGenerator.MazeGenerator(self.size, self.size)
+        except Exception as e: raise
         maze = mazeGen.make_empty_maze()
         maze = mazeGen.genMaze(maze, (0, 0))
         # Sets lower right corner to goal

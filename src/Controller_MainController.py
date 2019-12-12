@@ -11,7 +11,9 @@ class MainController:
         self.mazesArray = []
 
     def runMain(self):
-        self.c1.makeMazesWithStats()
+        try:
+            self.c1.makeMazesWithStats()
+        except Exception as e: raise
         self.mazesArray = self.c1.getMazes()
 
     def getMazes(self):
