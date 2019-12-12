@@ -1,14 +1,12 @@
 import Controller_MainController as mc
 import tkinter as tk
-from tkinter.messagebox import *
-# from tkinter import *
+from tkinter.messagebox import showwarning
+
 CheckVar1 = tk.IntVar
 slide_min = 5
 slide_max = 5
 
-# todo fix so it is a list in dropmenu
-mazeGeneratorOptions = ["one", "two", "three"]
-mazeSolverOptions = ["one", "two", "three"]
+############ GLOBAL - Varibels ############
 Mazes = []
 mazesList = []
 
