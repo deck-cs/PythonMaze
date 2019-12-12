@@ -1,5 +1,6 @@
 import Controller_MainController as mc
 import tkinter as tk
+from tkinter.messagebox import *
 # from tkinter import *
 CheckVar1 = tk.IntVar
 slide_min = 5
@@ -28,7 +29,7 @@ TOP_FRAME_SIZE = 0.5
 LOWER_FRAME_SIZE = 0.5
 
 
-BUTTON_COLOR = "#DE3E3E"
+BUTTON_COLOR = "#568FE5"  # #DE3E3E -rød
 BUTTON_TEXT_COLOR = "white"
 
 root = tk.Tk()
@@ -65,6 +66,10 @@ listbox_frame.place(relx=0.2, rely=0.4,
                     relwidth=WIDGET_SIZE_RELWIDTH, relheight=0.50)
 
 ############ FUNCTIONS ############
+
+
+def clearMazeView():
+    lower_frame.delete("all")
 
 
 def draw_maze(selected_maze):
@@ -122,21 +127,20 @@ def mazeSelect():
             maze_number = value
         print("Maze selected: " + str(maze_number))
         print(mazesList[0][0])
+        clearMazeView()
         draw_maze(mazesList[maze_number][0])
     else:
         mc1 = mc.MainController(0, 0)
         load_mazeList(mc1.getMazes())
 
-# Placeholder function
-
 
 def load_mazeList(mazesArray):
-    global Mazes
     global mazesList
+    global Mazes
     mazesList = mazesArray
+    Lb1.delete(0, tk.END)
     for maze in mazesArray:
         Mazes.append(maze)
-    Lb1.delete(0, tk.END)
     i = 1
     for m in Mazes:
         Lb1.insert(tk.END, "Maze number: " + str(i))
@@ -157,56 +161,39 @@ def slide_valueMax(value_slideMax):
     print("slide_valueMax: ", value_slideMax)
 
 
-def setMazeData():
-    a = spinbox_SolveItterations.get()
-    b = slide_min
-    c = slide_max
-    print('Button set selected_maze data, data is:',
-          a, "min size: ", b, "max size: ", c)
-
-
 def saveMazeCheckbox(IntVar):
     print('Checkbox: save maze solution is:', CheckVar1)
 
 
 def startMazeSolve():
-    a = int(slide_min)
-    b = int(slide_max)
-    c = int(spinbox_SolveItterations.get())
-    print('Button: maze solve start pushed')
-    mCon = mc.MainController([a, b], c)
-    mCon.runMain()
-    mazesArray = mCon.getMazes()
-    load_mazeList(mazesArray)
-
-
-def TBD():
-    pass
-
-# this function should import the graphical maze
-
-
-def MazeVar():
-    pass
-
-############ DropDown Menu ############
-
-
-variable = tk.StringVar()
-variable.set("Choose Maze Generator")  # default value
-dropDown_chooseMazeGenerator = tk.OptionMenu(
-    right_frame, variable, mazeGeneratorOptions)
-dropDown_chooseMazeGenerator.place(
-    relx=0.2, rely=0.02, relwidth=WIDGET_SIZE_RELWIDTH, relheight=0.1)
-
-variable2 = tk.StringVar()
-variable2.set("Choose Maze Solver")  # default value
-dropDown_chooseMazeGenerator = tk.OptionMenu(
-    right_frame, variable2, "one", "two", "three")
-dropDown_chooseMazeGenerator.place(
-    relx=0.2, rely=0.13, relwidth=WIDGET_SIZE_RELWIDTH, relheight=0.1)
+    global Mazes
+    try:
+        Mazes = []
+        a = int(spinbox_SolveItterations.get())
+        b = int(slide_min)
+        c = int(slide_max)
+        print('Button: maze solve start pushed')
+        assert (c >= b), "Maximum value must be larger than minimum value"
+        print('Button: maze solve start pushed, data is: ',
+              a, "min size: ", b, "max size: ", c)
+        mazesizes = []
+        x = c/5
+        for y in range(int(x)):
+            g = b * (y+1)
+            mazesizes.append(g)
+        mazesizes.sort()
+        mCon = mc.MainController(mazesizes, a)
+        mCon.runMain()
+        mazesArray = mCon.getMazes()
+        load_mazeList(mazesArray)
+    except AssertionError:
+        showwarning("Du har fucket op Sonny Boy",
+                    "Maximum value must be larger than minimum value")
+    except Exception as e:
+        showwarning("Du har fucket op Sonny Boy", e)
 
 ############ SCALE SLIDER ############
+
 
 minMazeSize_scale = tk.Scale(left_frame, orient='horizontal', from_=5,
                              to=35, resolution=5, command=slide_valueMin)
@@ -258,10 +245,10 @@ buttonStartMaze = tk.Button(top_frame, bg=BUTTON_COLOR, fg=BUTTON_TEXT_COLOR, te
                             command=lambda: startMazeSolve())
 buttonStartMaze.place(relx=0.19, rely=0.6, relwidth=0.3, relheight=0.25)
 
-buttonStartMaze = tk.Button(left_frame, bg=BUTTON_COLOR, fg=BUTTON_TEXT_COLOR, text='Set data', bd=5,
-                            command=lambda: setMazeData())
-buttonStartMaze.place(relx=MAZE_SIZE_RELX, rely=MAZE_SIZE_RELY,
-                      relwidth=WIDGET_SIZE_RELWIDTH, relheight=0.1)
+# buttonStartMaze = tk.Button(left_frame, bg=BUTTON_COLOR, fg=BUTTON_TEXT_COLOR, text='Set data', bd=5,
+#                             command=lambda: setMazeData())
+# buttonStartMaze.place(relx=MAZE_SIZE_RELX, rely=MAZE_SIZE_RELY,
+#                       relwidth=WIDGET_SIZE_RELWIDTH, relheight=0.1)
 
 buttonSelectMaze = tk.Button(right_frame, bg=BUTTON_COLOR, fg=BUTTON_TEXT_COLOR, text='Select maze', bd=5,
                              command=mazeSelect)
