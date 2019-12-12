@@ -1,5 +1,7 @@
 import Controller_MainController as mc
 import tkinter as tk
+# ! Skal gøres - pip install Pillow
+from PIL import Image, ImageTk
 from tkinter.messagebox import showwarning
 
 ############ GLOBAL - Varibels ############
@@ -60,7 +62,25 @@ listbox_frame = tk.Frame(right_frame)
 listbox_frame.place(relx=0.1, rely=0.3,
                     relwidth=WIDGET_SIZE_RELWIDTH, relheight=0.50)
 
+############ IMAGE ############
+load = Image.open('src/Banner-top-DCS.gif')
+img_width = int(160/WIDGET_SIZE_RELWIDTH)
+img_height = int(img_width/1.6)
+load = load.resize((img_width, img_height))
+render = ImageTk.PhotoImage(load)
+logo_label = tk.Label(left_frame, background='grey', image=render)
+logo_label.image = render
+logo_label.place(
+    relx=MAZE_SIZE_RELX, rely=0.02, relwidth=WIDGET_SIZE_RELWIDTH)
+
 ############ FUNCTIONS ############
+
+# todo this function is going to show in the middle what user selected
+
+
+def pickOfView():
+    global variable2
+    print('User wants to see: ' + str(variable2.get()))
 
 
 def clearMazeView():
@@ -192,6 +212,14 @@ maxMazeSize_scale = tk.Scale(left_frame, orient='horizontal', from_=5,
 maxMazeSize_scale.place(relx=MAZE_SIZE_RELX, rely=0.53, relwidth=WIDGET_SIZE_RELWIDTH,
                         relheight=WIDGET_SIZE_RELHEIGHT)
 
+############ Dropdown ############
+variable2 = tk.StringVar()
+variable2.set("Choose view")  # default value
+dropDown_chooseMazeGenerator = tk.OptionMenu(
+    right_frame, variable2, "Maze", "Time per place visited", "Barplot time and places visited")
+dropDown_chooseMazeGenerator.place(
+    relx=MAZE_SIZE_RELX, rely=0.03, relwidth=WIDGET_SIZE_RELWIDTH, relheight=0.07)
+
 ############ CHECKBOX ############
 
 checkbox_saveData = tk.Checkbutton(top_frame, text="Save data to file", command=lambda: saveMazeCheckbox(tk.IntVar),
@@ -240,7 +268,12 @@ buttonStartMaze.place(relx=0.19, rely=0.5, relwidth=0.3, relheight=0.25)
 
 buttonSelectMaze = tk.Button(right_frame, bg=BUTTON_COLOR, fg=BUTTON_TEXT_COLOR, text='Select maze', bd=5,
                              command=mazeSelect)
-buttonSelectMaze.place(relx=0.1, rely=0.82,
+buttonSelectMaze.place(relx=MAZE_SIZE_RELX, rely=0.82,
+                       relwidth=WIDGET_SIZE_RELWIDTH, relheight=0.05)
+
+buttonSelectView = tk.Button(right_frame, bg=BUTTON_COLOR, fg=BUTTON_TEXT_COLOR, text='Show', bd=5,
+                             command=pickOfView)
+buttonSelectView.place(relx=MAZE_SIZE_RELX, rely=0.12,
                        relwidth=WIDGET_SIZE_RELWIDTH, relheight=0.05)
 
 ############ Main Loop ############
