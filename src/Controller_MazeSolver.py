@@ -7,24 +7,25 @@ class MazeSolver:
 
     def search(self, x, y, maze, startTime):
         if maze[x][y] == '2':
-            #print('found at %d,%d' % (x, y))
+            print('found at %d,%d' % (x, y))
             end = time.time()
-            #print('\n'.join([''.join(['{:4}'.format(item) for item in row])for row in maze]))
+            print(
+                '\n'.join([''.join(['{:4}'.format(item) for item in row])for row in maze]))
             # print('\n'.join([''.join(['{:4}'.format(item) for item in row])
             #                 for row in maze]))
             timeUsed = end - startTime
-            #print("Time used:" + " " + str((timeUsed)))
+            print("Time used:" + " " + str((timeUsed)))
             self.solvedTimes = timeUsed
             return True
         elif maze[x][y] == '1':
-            #print('wall at %d,%d' % (x, y))
+            print('wall at %d,%d' % (x, y))
             return False
         elif maze[x][y] == '3':
-            #print('visited at %d,%d' % (x, y))
+            print('visited at %d,%d' % (x, y))
             self.pv += 1
             return False
 
-        #print('visiting %d,%d' % (x, y))
+        print('visiting %d,%d' % (x, y))
 
         # mark as visited
 

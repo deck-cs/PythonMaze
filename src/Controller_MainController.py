@@ -13,18 +13,11 @@ class MainController:
     def runMain(self):
         try:
             self.c1.makeMazesWithStats()
-        except Exception as e:
-            raise
-        # self.mazesArray = self.c1.getMazes()
+        except Exception as e: raise
+        self.mazesArray = self.c1.getMazes()
 
     def getMazes(self):
-        arrayLoadMazes = self.c1.loadFromJSON("Mazes")
-        ultimateMazeArray = []
-        for x in arrayLoadMazes:
-            for y in x:
-                ultimateMazeArray.append([y])
-        self.mazesArray = ultimateMazeArray
-        print("maze size from sub: " + str(len(self.mazesArray)))
+        self.mazesArray = self.c1.loadFromJSON("Mazes")
         return self.mazesArray
 
 
