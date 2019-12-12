@@ -37,4 +37,5 @@ class MazeSolver:
             or (x > 0 and self.search(x-1, y, maze, startTime))
                 or (y < len(maze)-1 and self.search(x, y+1, maze, startTime))):
             return True
+        maze[x][y]='4'
         return False
