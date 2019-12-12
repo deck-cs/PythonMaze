@@ -2,11 +2,10 @@ import Controller_MainController as mc
 import tkinter as tk
 from tkinter.messagebox import showwarning
 
+############ GLOBAL - Varibels ############
 CheckVar1 = tk.IntVar
 slide_min = 5
 slide_max = 5
-
-############ GLOBAL - Varibels ############
 Mazes = []
 mazesList = []
 
@@ -36,10 +35,6 @@ root.title('The amazing MAZE solver')
 canvas = tk.Canvas(root, height=HEIGHT, width=WIDTH)
 canvas.pack()
 
-# background_image = tk.PhotoImage(file='landscape.gif')
-# background_label = tk.Label(root, image=background_image)
-# background_label.place(relwidth=1, relheight=1)
-
 ############ FRAMES ############
 
 left_frame = tk.Frame(root, bg='grey')
@@ -50,17 +45,18 @@ right_frame.place(relx=0.75, relwidth=RIGHT_FRAME_SIZE, relheight=1)
 
 top_frame = tk.Frame(root, bg='grey', bd='5')
 top_frame.place(relx=0.5, rely=0, relwidth=TOP_FRAME_SIZE,
-                relheight=0.25, anchor='n')
+                relheight=0.2, anchor='n')
 
 lower_frame = tk.Canvas(root, bg='white')
-lower_frame.place(relx=0.5, rely=0.25, relwidth=LOWER_FRAME_SIZE,
+lower_frame.place(relx=0.5, rely=0.2, relwidth=LOWER_FRAME_SIZE,
                   relheight=0.75, anchor='n')
 
-# lower_label = tk.Label(lower_frame)
-# lower_label.place(relwidth=1, relheight=1)
+bottom_frame = tk.Frame(root, bg='grey')
+bottom_frame.place(relx=0.5, rely=0.95, relwidth=LOWER_FRAME_SIZE,
+                   relheight=0.05, anchor='n')
 
 listbox_frame = tk.Frame(right_frame)
-listbox_frame.place(relx=0.2, rely=0.4,
+listbox_frame.place(relx=0.1, rely=0.3,
                     relwidth=WIDGET_SIZE_RELWIDTH, relheight=0.50)
 
 ############ FUNCTIONS ############
@@ -107,7 +103,7 @@ def draw_maze(selected_maze):
 
     print("maze_draw done")
 
-    lower_frame.place(lower_frame, anchor='n')
+    lower_frame.place()
 
 
 def mazeSelect():
@@ -200,7 +196,7 @@ maxMazeSize_scale.place(relx=MAZE_SIZE_RELX, rely=0.60, relwidth=WIDGET_SIZE_REL
 
 checkbox_saveData = tk.Checkbutton(top_frame, text="Save data to file", command=lambda: saveMazeCheckbox(tk.IntVar),
                                    variable=CheckVar1, onvalue=1, offvalue=0, height=5, width=15)
-checkbox_saveData.place(relx=0.5, rely=0.6, relwidth=0.3, relheight=0.25)
+checkbox_saveData.place(relx=0.5, rely=0.5, relwidth=0.3, relheight=0.25)
 
 ############ SPINBOX ############
 
@@ -228,13 +224,13 @@ title_label.place(relx=0.25, rely=0.1, relheight=0.25, relwidth=0.5)
 
 title_listbox_label = tk.Label(right_frame, text='List of mazes')
 title_listbox_label.place(
-    relx=0.2, rely=0.32, relheight=0.07, relwidth=WIDGET_SIZE_RELWIDTH)
+    relx=0.1, rely=0.22, relheight=0.07, relwidth=WIDGET_SIZE_RELWIDTH)
 
 ############ BUTTONS ############
 
 buttonStartMaze = tk.Button(top_frame, bg=BUTTON_COLOR, fg=BUTTON_TEXT_COLOR, text='Solve maze(s)', bd=5,
                             command=lambda: startMazeSolve())
-buttonStartMaze.place(relx=0.19, rely=0.6, relwidth=0.3, relheight=0.25)
+buttonStartMaze.place(relx=0.19, rely=0.5, relwidth=0.3, relheight=0.25)
 
 # buttonStartMaze = tk.Button(left_frame, bg=BUTTON_COLOR, fg=BUTTON_TEXT_COLOR, text='Set data', bd=5,
 #                             command=lambda: setMazeData())
@@ -243,7 +239,7 @@ buttonStartMaze.place(relx=0.19, rely=0.6, relwidth=0.3, relheight=0.25)
 
 buttonSelectMaze = tk.Button(right_frame, bg=BUTTON_COLOR, fg=BUTTON_TEXT_COLOR, text='Select maze', bd=5,
                              command=mazeSelect)
-buttonSelectMaze.place(relx=0.2, rely=0.92,
+buttonSelectMaze.place(relx=0.1, rely=0.82,
                        relwidth=WIDGET_SIZE_RELWIDTH, relheight=0.05)
 
 ############ Main Loop ############
