@@ -177,8 +177,12 @@ def startMazeSolve():
     try:
         Mazes = []
         a = int(spinbox_SolveItterations.get())
-        b = int(slide_min)
-        c = int(slide_max)
+        if (int(slide_min) > int(slide_max)):
+            c = int(slide_min)
+            b = int(slide_max)
+        else:
+            b = int(slide_min)
+            c = int(slide_max)
         print('Button: maze solve start pushed')
         assert (c >= b), "Maximum value must be larger than minimum value"
         print('Button: maze solve start pushed, data is: ',
@@ -218,7 +222,7 @@ variable2.set("Choose view")  # default value
 dropDown_chooseMazeGenerator = tk.OptionMenu(
     right_frame, variable2, "Maze", "Time per place visited", "Barplot time and places visited")
 dropDown_chooseMazeGenerator.place(
-    relx=MAZE_SIZE_RELX, rely=0.03, relwidth=WIDGET_SIZE_RELWIDTH, relheight=0.07)
+    relx=MAZE_SIZE_RELX, rely=0.05, relwidth=WIDGET_SIZE_RELWIDTH, relheight=0.05)
 
 ############ CHECKBOX ############
 
