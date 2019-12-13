@@ -184,10 +184,13 @@ def startMazeSolve():
         print('Button: maze solve start pushed, data is: ',
               a, "min size: ", b, "max size: ", c)
         mazesizes = []
-        x = c/5
-        for y in range(int(x)):
-            g = b * (y+1)
-            mazesizes.append(g)
+        i = b
+        while i < c:
+            mazesizes.append(i)
+            i += 5
+        else:
+            mazesizes.append(i)
+        print("x er: " + str(int(i)))
         mazesizes.sort()
         mCon = mc.MainController(mazesizes, a)
         mCon.runMain()
