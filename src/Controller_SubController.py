@@ -110,4 +110,5 @@ class SubController:
         ax3.bar(self.tryList, self.relatedValues, width=0.3, align='center')
         ax3.set_ylabel('Time pr. move', color='tab:red')
         ax3.tick_params(axis='y')
-        plt.show()
+        return plt
+        #plt.show()
