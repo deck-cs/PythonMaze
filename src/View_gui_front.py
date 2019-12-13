@@ -29,6 +29,7 @@ TOP_FRAME_SIZE = 0.5
 LOWER_FRAME_SIZE = 0.5
 SCROLLSLIDER_MAX = 100
 SLIDEINTERVAL = 5
+NUMBEROFITTERATIONS_MAX = 40
 
 BUTTON_COLOR = "#568FE5"  # #DE3E3E -rød
 BUTTON_TEXT_COLOR = "white"
@@ -191,7 +192,6 @@ def startMazeSolve():
             i += 5
         else:
             mazesizes.append(i)
-        print("x er: " + str(int(i)))
         mazesizes.sort()
         mCon = mc.MainController(mazesizes, a)
         mCon.runMain()
@@ -226,7 +226,8 @@ dropDown_chooseMazeGenerator.place(
 
 ############ SPINBOX ############
 
-spinbox_SolveItterations = tk.Spinbox(left_frame, from_=1, to=40)
+spinbox_SolveItterations = tk.Spinbox(
+    left_frame, from_=1, to=NUMBEROFITTERATIONS_MAX)
 spinbox_SolveItterations.place(
     relx=MAZE_SIZE_RELX, rely=0.27, relwidth=WIDGET_SIZE_RELWIDTH, relheight=0.05)
 
