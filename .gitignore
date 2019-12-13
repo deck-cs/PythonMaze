@@ -5,3 +5,4 @@ src/__pycache__/controller.cpython-37.pyc
 src/.vscode/settings.json
 src/.vscode/settings.json
 Mazes.json
+*.json
