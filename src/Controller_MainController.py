@@ -24,7 +24,7 @@ class MainController:
             for y in x:
                 ultimateMazeArray.append([y])
         self.mazesArray = ultimateMazeArray
-        print("maze size from sub: " + str(len(self.mazesArray)))
+        #print("maze size from sub: " + str(len(self.mazesArray)))
         return self.mazesArray
 
 
