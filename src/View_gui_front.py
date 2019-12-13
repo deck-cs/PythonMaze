@@ -27,7 +27,8 @@ LEFT_FRAME_SIZE = 0.25
 RIGHT_FRAME_SIZE = 0.25
 TOP_FRAME_SIZE = 0.5
 LOWER_FRAME_SIZE = 0.5
-
+SCROLLSLIDER_MAX = 100
+SLIDEINTERVAL = 5
 
 BUTTON_COLOR = "#568FE5"  # #DE3E3E -rød
 BUTTON_TEXT_COLOR = "white"
@@ -206,12 +207,12 @@ def startMazeSolve():
 
 
 minMazeSize_scale = tk.Scale(left_frame, orient='horizontal', from_=5,
-                             to=125, resolution=5, command=slide_valueMin)
+                             to=SCROLLSLIDER_MAX, resolution=SLIDEINTERVAL, command=slide_valueMin)
 minMazeSize_scale.place(relx=MAZE_SIZE_RELX, rely=0.39, relwidth=WIDGET_SIZE_RELWIDTH,
                         relheight=WIDGET_SIZE_RELHEIGHT)
 
 maxMazeSize_scale = tk.Scale(left_frame, orient='horizontal', from_=5,
-                             to=125, resolution=5, command=slide_valueMax)
+                             to=SCROLLSLIDER_MAX, resolution=SLIDEINTERVAL, command=slide_valueMax)
 maxMazeSize_scale.place(relx=MAZE_SIZE_RELX, rely=0.53, relwidth=WIDGET_SIZE_RELWIDTH,
                         relheight=WIDGET_SIZE_RELHEIGHT)
 
