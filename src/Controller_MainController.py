@@ -27,6 +27,9 @@ class MainController:
         #print("maze size from sub: " + str(len(self.mazesArray)))
         return self.mazesArray
 
+    def getPLTGraph(self):
+        return self.c1.makePlots()
+
 
 if __name__ == "__main__":
     mc = MainController([5, 10], 5)

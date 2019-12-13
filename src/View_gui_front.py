@@ -206,12 +206,12 @@ def startMazeSolve():
 
 
 minMazeSize_scale = tk.Scale(left_frame, orient='horizontal', from_=5,
-                             to=35, resolution=5, command=slide_valueMin)
+                             to=125, resolution=5, command=slide_valueMin)
 minMazeSize_scale.place(relx=MAZE_SIZE_RELX, rely=0.39, relwidth=WIDGET_SIZE_RELWIDTH,
                         relheight=WIDGET_SIZE_RELHEIGHT)
 
 maxMazeSize_scale = tk.Scale(left_frame, orient='horizontal', from_=5,
-                             to=35, resolution=5, command=slide_valueMax)
+                             to=125, resolution=5, command=slide_valueMax)
 maxMazeSize_scale.place(relx=MAZE_SIZE_RELX, rely=0.53, relwidth=WIDGET_SIZE_RELWIDTH,
                         relheight=WIDGET_SIZE_RELHEIGHT)
 
