@@ -168,10 +168,6 @@ def slide_valueMax(value_slideMax):
     print("slide_valueMax: ", value_slideMax)
 
 
-def saveMazeCheckbox(IntVar):
-    print('Checkbox: save maze solution is:', CheckVar1)
-
-
 def startMazeSolve():
     global Mazes
     try:
@@ -224,12 +220,6 @@ dropDown_chooseMazeGenerator = tk.OptionMenu(
 dropDown_chooseMazeGenerator.place(
     relx=MAZE_SIZE_RELX, rely=0.05, relwidth=WIDGET_SIZE_RELWIDTH, relheight=0.05)
 
-############ CHECKBOX ############
-
-checkbox_saveData = tk.Checkbutton(top_frame, text="Save data to file", command=lambda: saveMazeCheckbox(tk.IntVar),
-                                   variable=CheckVar1, onvalue=1, offvalue=0, height=5, width=15)
-checkbox_saveData.place(relx=0.5, rely=0.5, relwidth=0.3, relheight=0.25)
-
 ############ SPINBOX ############
 
 spinbox_SolveItterations = tk.Spinbox(left_frame, from_=1, to=40)
@@ -268,7 +258,7 @@ bottom_label.place(relx=0.5, rely=0.15, anchor='n')
 
 buttonStartMaze = tk.Button(top_frame, bg=BUTTON_COLOR, fg=BUTTON_TEXT_COLOR, text='Solve maze(s)', bd=5,
                             command=lambda: startMazeSolve())
-buttonStartMaze.place(relx=0.19, rely=0.5, relwidth=0.3, relheight=0.25)
+buttonStartMaze.place(relx=0.19, rely=0.5, relwidth=0.6, relheight=0.25)
 
 buttonSelectMaze = tk.Button(right_frame, bg=BUTTON_COLOR, fg=BUTTON_TEXT_COLOR, text='Select maze', bd=5,
                              command=mazeSelect)
