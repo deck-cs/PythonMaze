@@ -1,9 +1,9 @@
-import Controller_MazeController as mazeCon
+import ModelMaze as mazeCon
 import matplotlib.pyplot as plt
 import json
 
 
-class SubController:
+class SubModel:
     def __init__(self, amount, sizesList):
         self.amount = amount
         self.sizesList = sizesList
@@ -19,7 +19,7 @@ class SubController:
     def makeMazesWithStats(self):
         for x in range(len(self.sizesList)):
             try:
-                mazes = mazeCon.MazeController(self.amount, self.sizesList[x])
+                mazes = mazeCon.MazeModel(self.amount, self.sizesList[x])
             except Exception as e: raise
             # self.mazesArray.append(mazes.makeAndSolve())
             try:

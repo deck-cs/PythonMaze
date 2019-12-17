@@ -1,12 +1,12 @@
-import Controller_MazeGenerator
-import Controller_MazeSolver
+import ModelMazeGenerator
+import ModelMazeSolver
 import time
 import sys
 import threading
 import concurrent.futures as conFu
 
 
-class MazeController:
+class MazeModel:
     def __init__(self, amount, size):
         sys.setrecursionlimit(10000)
         self.amount = amount
@@ -25,7 +25,7 @@ class MazeController:
 
     def makeMaze(self):
         try:
-            mazeGen = Controller_MazeGenerator.MazeGenerator(self.size, self.size)
+            mazeGen = ModelMazeGenerator.MazeGenerator(self.size, self.size)
         except Exception as e: raise
         maze = mazeGen.make_empty_maze()
         maze = mazeGen.genMaze(maze, (0, 0))
@@ -38,7 +38,7 @@ class MazeController:
 
     def solveMaze(self):
         startTime = time.time()  # Initiates the time method
-        mazeSolver = Controller_MazeSolver.MazeSolver(self.maze)
+        mazeSolver = ModelMazeSolver.MazeSolver(self.maze)
         mazeSolver.search(0, 1, self.maze, startTime)
         self.pvList.append(mazeSolver.pv)
         self.solvedTimesList.append(mazeSolver.solvedTimes)
@@ -66,7 +66,7 @@ class MazeController:
     def makeMazeThread(self):
         print("Making maze")
         try:
-            mazeGen = Controller_MazeGenerator.MazeGenerator(self.size, self.size)
+            mazeGen = ModelMazeGenerator.MazeGenerator(self.size, self.size)
         except Exception as e: raise
         maze = mazeGen.make_empty_maze()
         maze = mazeGen.genMaze(maze, (0, 0))
@@ -88,7 +88,7 @@ class MazeController:
         del self.unsolvedMazes[len(self.unsolvedMazes)-1]
         self.lock.release()
         startTime = time.time()  # Initiates the time method
-        mazeSolver = Controller_MazeSolver.MazeSolver(maze)
+        mazeSolver = ModelMazeSolver.MazeSolver(maze)
         mazeSolver.search(0, 1, maze, startTime)
         self.pvLock.acquire()
         self.pvList.append(mazeSolver.pv)

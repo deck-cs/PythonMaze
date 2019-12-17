@@ -1,4 +1,4 @@
-import Controller_MainController as mc
+import ModelMain as mc
 import tkinter as tk
 # ! Skal gøres - pip install Pillow
 from PIL import Image, ImageTk
@@ -139,7 +139,7 @@ def mazeSelect():
         clearMazeView()
         draw_maze(mazesList[maze_number][0])
     else:
-        mc1 = mc.MainController(0, 0)
+        mc1 = mc.MainModel(0, 0)
         load_mazeList(mc1.getMazes())
 
 
@@ -193,7 +193,7 @@ def startMazeSolve():
         else:
             mazesizes.append(i)
         mazesizes.sort()
-        mCon = mc.MainController(mazesizes, a)
+        mCon = mc.MainModel(mazesizes, a)
         mCon.runMain()
         mazesArray = mCon.getMazes()
         load_mazeList(mazesArray)
