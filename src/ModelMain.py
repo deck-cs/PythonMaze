@@ -1,13 +1,13 @@
-import Controller_SubController as sCon
+import ModelSub as sCon
 # from Controller import SubController as sCon
 mazesArray = []
 
 
-class MainController:
+class MainModel:
     def __init__(self, sizesList, amount):
         self.sizesList = sizesList
         self.amount = amount
-        self.c1 = sCon.SubController(self.amount, self.sizesList)
+        self.c1 = sCon.SubModel(self.amount, self.sizesList)
         self.mazesArray = []
 
     def runMain(self):
@@ -32,5 +32,5 @@ class MainController:
 
 
 if __name__ == "__main__":
-    mc = MainController([5, 10], 5)
+    mc = MainModel([5, 10], 5)
     mc.runMain()
