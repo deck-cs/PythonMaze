@@ -4,6 +4,7 @@ import time
 import sys
 import threading
 import concurrent.futures as conFu
+import MazeException
 
 
 class MazeModel:
@@ -26,7 +27,7 @@ class MazeModel:
     def makeMaze(self):
         try:
             mazeGen = ModelMazeGenerator.MazeGenerator(self.size, self.size)
-        except Exception as e: raise
+        except MazeException.MazeException as e: raise
         maze = mazeGen.make_empty_maze()
         maze = mazeGen.genMaze(maze, (0, 0))
         # Sets lower right corner to goal
