@@ -52,9 +52,9 @@ top_frame = tk.Frame(root, bg='grey', bd='5')
 top_frame.place(relx=0.5, rely=0, relwidth=TOP_FRAME_SIZE,
                 relheight=0.2, anchor='n')
 
-lower_frame = tk.Canvas(root, bg='white')
-lower_frame.place(relx=0.5, rely=0.2, relwidth=LOWER_FRAME_SIZE,
-                  relheight=0.75, anchor='n')
+display_canvas = tk.Canvas(root, bg='white')
+display_canvas.place(relx=0.5, rely=0.2, relwidth=LOWER_FRAME_SIZE,
+                     relheight=0.75, anchor='n')
 
 bottom_frame = tk.Frame(root, bg='grey')
 bottom_frame.place(relx=0.5, rely=0.95, relwidth=LOWER_FRAME_SIZE,
@@ -86,7 +86,7 @@ def pickOfView():
 
 
 def clearMazeView():
-    lower_frame.delete("all")
+    display_canvas.delete("all")
 
 
 def draw_maze(selected_maze):
@@ -98,34 +98,34 @@ def draw_maze(selected_maze):
             # NOTE the order of y and x in the next line
             character = selected_maze[y][x]
             # Calculate the screen x, y coordinates
-            CUBE_SIZE = lower_frame.winfo_width()/len(selected_maze[y])
+            CUBE_SIZE = display_canvas.winfo_width()/len(selected_maze[y])
             screen_x = (x * CUBE_SIZE)
             screen_y = (y * CUBE_SIZE)
 
             # Check if it is an 0 (representing a wall)
             if character == "0":
-                lower_frame.create_rectangle(
+                display_canvas.create_rectangle(
                     screen_x, screen_y, screen_x+CUBE_SIZE, screen_y+CUBE_SIZE, fill="white")
             # Check if it is an 1 (representing a wall)
             if character == "1":
-                lower_frame.create_rectangle(
+                display_canvas.create_rectangle(
                     screen_x, screen_y, screen_x+CUBE_SIZE, screen_y+CUBE_SIZE, fill="black")
 
             # Check if it is an 2 (representing a wall)
             if character == "2":
-                lower_frame.create_rectangle(
+                display_canvas.create_rectangle(
                     screen_x, screen_y, screen_x+CUBE_SIZE, screen_y+CUBE_SIZE, fill="gold")
             # Check if it is an 3 (representing a wall)
             if character == "3":
-                lower_frame.create_rectangle(
+                display_canvas.create_rectangle(
                     screen_x, screen_y, screen_x+CUBE_SIZE, screen_y+CUBE_SIZE, fill="green")
             if character == "4":
-                lower_frame.create_rectangle(
+                display_canvas.create_rectangle(
                     screen_x, screen_y, screen_x+CUBE_SIZE, screen_y+CUBE_SIZE, fill="blue")
 
     print("maze_draw done")
 
-    lower_frame.place()
+    display_canvas.place()
 
 
 def mazeSelect():
