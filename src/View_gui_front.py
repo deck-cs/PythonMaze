@@ -13,6 +13,7 @@ slide_min = 5
 slide_max = 5
 Mazes = []
 mazesList = []
+graphs = []
 
 ############ CANVAS - Setup ############
 HEIGHT = 800
@@ -84,22 +85,17 @@ logo_label.place(
 
 
 def pickOfView():
-    global variable2
-    # print('User wants to see: ' + str(variable2.get()))
-    clearMazeView()
-    # if (variable2.get() == "Maze"):
-    #     draw_maze()
+    global variable2, graphs
+    print("array", graphs)
     if (variable2.get() == "Time per place visited"):
         print('User wants to see: ' + str(variable2.get()))
-
-        mc1 = mm.MainModel(0, 0)
-        plt = mc1.getPLTGraph()
+        plt = graphs[1]
         plt.show()
-        # plt.FigureCanvasBase()
 
     if (variable2.get() == "Barplot time and places visited"):
         print('User wants to see: ' + str(variable2.get()))
-        display_canvas.place()
+        plt = graphs[0]
+        plt.show()
 
 
 def clearMazeView():
@@ -188,7 +184,7 @@ def slide_valueMax(value_slideMax):
 
 
 def startMazeSolve():
-    global Mazes
+    global Mazes, graphs
     try:
         Mazes = []
         a = int(spinbox_SolveItterations.get())
@@ -212,6 +208,8 @@ def startMazeSolve():
         mazesizes.sort()
         mm1 = mm.MainModel(mazesizes, a)
         mm1.runMain()
+        graphs.append(mm1.getPLTGraph(1))
+        graphs.append(mm1.getPLTGraph(2))
         mazesArray = mm1.getMazes()
         load_mazeList(mazesArray)
     except AssertionError:
