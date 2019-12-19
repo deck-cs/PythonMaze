@@ -1,8 +1,14 @@
-import ModelMain as mc
-import tkinter as tk
-# ! Skal gøres - pip install Pillow
-from PIL import Image, ImageTk
 from tkinter.messagebox import showwarning
+from PIL import Image, ImageTk
+from matplotlib.figure import Figure
+from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg, NavigationToolbar2Tk
+import ModelMain as mm
+import tkinter as tk
+import matplotlib
+matplotlib.use("TkAgg")
+
+
+# ! Skal gøres - pip install Pillow
 
 ############ GLOBAL - Varibels ############
 CheckVar1 = tk.IntVar
@@ -75,6 +81,9 @@ logo_label.image = render
 logo_label.place(
     relx=MAZE_SIZE_RELX, rely=0.02, relwidth=WIDGET_SIZE_RELWIDTH)
 
+############ MATPLOTLIB ############
+
+
 ############ FUNCTIONS ############
 
 # todo this function is going to show in the middle what user selected
@@ -82,7 +91,24 @@ logo_label.place(
 
 def pickOfView():
     global variable2
-    print('User wants to see: ' + str(variable2.get()))
+    # print('User wants to see: ' + str(variable2.get()))
+    clearMazeView()
+    # if (variable2.get() == "Maze"):
+    #     draw_maze()
+    if (variable2.get() == "Time per place visited"):
+        print('User wants to see: ' + str(variable2.get()))
+        # mm.MainModel.getPLTGraph().plt.show()
+        # f = Figure(figsize=(5, 5), dpi=100)
+        # a = f.add_subplot(111)
+        # a.plot([1, 2, 3, 4, 5, 6, 7, 8], [5, 6, 1, 3, 8, 9, 3, 5])
+
+        # canvas = FigureCanvasTkAgg(f)
+        # canvas.show()
+        # canvas.get_tk_widget().place(display_canvas)
+
+    if (variable2.get() == "Barplot time and places visited"):
+        print('User wants to see: ' + str(variable2.get()))
+        display_canvas.place()
 
 
 def clearMazeView():
@@ -139,7 +165,7 @@ def mazeSelect():
         clearMazeView()
         draw_maze(mazesList[maze_number][0])
     else:
-        mc1 = mc.MainModel(0, 0)
+        mc1 = mm.MainModel(0, 0)
         load_mazeList(mc1.getMazes())
 
 
@@ -193,7 +219,7 @@ def startMazeSolve():
         else:
             mazesizes.append(i)
         mazesizes.sort()
-        mCon = mc.MainModel(mazesizes, a)
+        mCon = mm.MainModel(mazesizes, a)
         mCon.runMain()
         mazesArray = mCon.getMazes()
         load_mazeList(mazesArray)
@@ -220,7 +246,7 @@ maxMazeSize_scale.place(relx=MAZE_SIZE_RELX, rely=0.53, relwidth=WIDGET_SIZE_REL
 variable2 = tk.StringVar()
 variable2.set("Choose view")  # default value
 dropDown_chooseMazeGenerator = tk.OptionMenu(
-    right_frame, variable2, "Maze", "Time per place visited", "Barplot time and places visited")
+    right_frame, variable2, "Time per place visited", "Barplot time and places visited")
 dropDown_chooseMazeGenerator.place(
     relx=MAZE_SIZE_RELX, rely=0.05, relwidth=WIDGET_SIZE_RELWIDTH, relheight=0.05)
 

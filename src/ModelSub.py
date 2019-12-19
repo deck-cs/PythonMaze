@@ -20,11 +20,13 @@ class SubModel:
         for x in range(len(self.sizesList)):
             try:
                 mazes = mazeCon.MazeModel(self.amount, self.sizesList[x])
-            except Exception as e: raise
+            except Exception as e:
+                raise
             # self.mazesArray.append(mazes.makeAndSolve())
             try:
                 self.mazesArray.append(mazes.threadedMakeAndSolve())
-            except Exception as e: raise
+            except Exception as e:
+                raise
             self.iteration = self.sizesList[x]
             self.solvedTimesList = mazes.solvedTimesList
             self.makeStatNumbers()
@@ -110,5 +112,5 @@ class SubModel:
         ax3.bar(self.tryList, self.relatedValues, width=0.3, align='center')
         ax3.set_ylabel('Time pr. move', color='tab:red')
         ax3.tick_params(axis='y')
-        return plt
-        #plt.show()
+        # return plt
+        plt.show()
