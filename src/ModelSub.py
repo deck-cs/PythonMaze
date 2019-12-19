@@ -1,6 +1,7 @@
 import ModelMaze as mazeCon
 import matplotlib.pyplot as plt
 import json
+import MazeException
 
 
 class SubModel:
@@ -20,8 +21,8 @@ class SubModel:
         for x in range(len(self.sizesList)):
             try:
                 mazes = mazeCon.MazeModel(self.amount, self.sizesList[x])
-            except Exception as e:
-                raise
+            except MazeException.MazeException as e: raise
+            except Exception as e: raise
             # self.mazesArray.append(mazes.makeAndSolve())
             try:
                 self.mazesArray.append(mazes.threadedMakeAndSolve())

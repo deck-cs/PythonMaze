@@ -1,12 +1,14 @@
 from random import shuffle
-
+import MazeException
 
 class MazeGenerator:
     def __init__(self, sizeX, sizeY):
         self.sizeX = sizeX
         self.sizeY = sizeY
         if(sizeX <= 0 or sizeY <= 0):
-            raise Exception("The size of the maze was 0 or less")
+            mazEx = MazeException.MazeException()
+            mazEx.mazeMess("Invalid size input.")
+            raise mazEx
        # self.generatorType = generatorType
         self.maze = self.make_empty_maze()
 
@@ -37,7 +39,7 @@ class MazeGenerator:
             new_coords = (coords[0] + direction[0], coords[1] + direction[1])
             if (0 <= new_coords[0] < len(maze)) and \
                 (0 <= new_coords[1] < len(maze[0])) and \
-                    not maze[new_coords[0]][new_coords[1]]:  # Checks if next space is within maze walls and if visited prior (Can it trap itself here?)
+                    not maze[new_coords[0]][new_coords[1]]:  # Checks if next space is within maze walls and if visited prior
                 # Appends upcoming direction for current space
                 maze[coords[0]][coords[1]].append(direction)
                 maze[new_coords[0]][new_coords[1]].append(

@@ -1,4 +1,5 @@
 import ModelSub as sCon
+import MazeException
 # from Controller import SubController as sCon
 mazesArray = []
 
@@ -13,6 +14,8 @@ class MainModel:
     def runMain(self):
         try:
             self.c1.makeMazesWithStats()
+        except MazeException.MazeException as e:
+            raise
         except Exception as e:
             raise
         # self.mazesArray = self.c1.getMazes()
