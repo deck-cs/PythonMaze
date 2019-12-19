@@ -89,7 +89,8 @@ class SubModel:
         self.pvListFinal.append(max(pvList))
 
     def makePlots(self):
-        fig1, ax1 = plt.subplots()
+        fig1 = plt.figure()
+        ax1 = fig1.add_subplot()
         plt.xticks(rotation=45)
         ax1.set_ylabel('Time for solve', color='tab:blue')
         # bar(x-vals, y-vals, bar width, align bar relative to x-val on x-axis) )
@@ -106,12 +107,15 @@ class SubModel:
         #plt.ylabel("TimeSolved", fontsize=10)
         plt.tick_params(axis='both', which='major', labelsize=10)
         # Plot 2
-        fig2, ax3 = plt.subplots()
-        plt.xticks(rotation=45)
-        plt.title("Time over places visited")
-        plt.xlabel("Attempt", fontsize=10)
+        fig2 = plt.figure()
+        ax3 = fig2.add_subplot()
+        ax3 = plt
+        ax3.xticks(rotation=45)#
+        ax3.title("Time over places visited")#
+        ax3.xlabel("Attempt", fontsize=10)#
         ax3.bar(self.tryList, self.relatedValues, width=0.3, align='center')
-        ax3.set_ylabel('Time pr. move', color='tab:red')
+        ax3.ylabel('Time pr. move', color='tab:red')
         ax3.tick_params(axis='y')
         # return plt
-        plt.show()
+        #ax1.show()
+        fig2.show()
