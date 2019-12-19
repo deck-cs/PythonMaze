@@ -35,7 +35,7 @@ class SubModel:
             self.getStatValues()
             self.getRelatedValues(mazes.pvList)
             self.getPvListFinal(mazes.pvList)
-        self.makePlots()
+        self.makePlots(1)
         self.saveToJSON("Mazes")
 
     def saveToJSON(self, filename):
@@ -88,7 +88,7 @@ class SubModel:
         self.pvListFinal.append(sum(pvList)/len(pvList))
         self.pvListFinal.append(max(pvList))
 
-    def makePlots(self):
+    def makePlots(self,figNum):
         fig1 = plt.figure()
         ax1 = fig1.add_subplot()
         plt.xticks(rotation=45)
@@ -116,6 +116,8 @@ class SubModel:
         ax3.bar(self.tryList, self.relatedValues, width=0.3, align='center')
         ax3.ylabel('Time pr. move', color='tab:red')
         ax3.tick_params(axis='y')
+        if(figNum == 1):
+            return fig1
+        elif (figNum == 2):
+            return fig2
         return plt
-        #ax1.show()
-        # fig2.show()

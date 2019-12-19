@@ -30,8 +30,8 @@ class MainModel:
         #print("maze size from sub: " + str(len(self.mazesArray)))
         return self.mazesArray
 
-    def getPLTGraph(self):
-        return self.c1.makePlots()
+    def getPLTGraph(self,figNum):
+        return self.c1.makePlots(figNum)
 
 
 if __name__ == "__main__":
