@@ -1,11 +1,8 @@
 from tkinter.messagebox import showwarning
 from PIL import Image, ImageTk
-from matplotlib.figure import Figure
-from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg, NavigationToolbar2Tk
 import ModelMain as mm
 import tkinter as tk
-import matplotlib
-matplotlib.use("TkAgg")
+import matplotlib.pyplot as plt
 
 
 # ! Skal gøres - pip install Pillow
@@ -81,9 +78,6 @@ logo_label.image = render
 logo_label.place(
     relx=MAZE_SIZE_RELX, rely=0.02, relwidth=WIDGET_SIZE_RELWIDTH)
 
-############ MATPLOTLIB ############
-
-
 ############ FUNCTIONS ############
 
 # todo this function is going to show in the middle what user selected
@@ -97,14 +91,11 @@ def pickOfView():
     #     draw_maze()
     if (variable2.get() == "Time per place visited"):
         print('User wants to see: ' + str(variable2.get()))
-        # mm.MainModel.getPLTGraph().plt.show()
-        # f = Figure(figsize=(5, 5), dpi=100)
-        # a = f.add_subplot(111)
-        # a.plot([1, 2, 3, 4, 5, 6, 7, 8], [5, 6, 1, 3, 8, 9, 3, 5])
 
-        # canvas = FigureCanvasTkAgg(f)
-        # canvas.show()
-        # canvas.get_tk_widget().place(display_canvas)
+        mc1 = mm.MainModel(0, 0)
+        plt = mc1.getPLTGraph()
+        plt.show()
+        # plt.FigureCanvasBase()
 
     if (variable2.get() == "Barplot time and places visited"):
         print('User wants to see: ' + str(variable2.get()))
@@ -219,9 +210,9 @@ def startMazeSolve():
         else:
             mazesizes.append(i)
         mazesizes.sort()
-        mCon = mm.MainModel(mazesizes, a)
-        mCon.runMain()
-        mazesArray = mCon.getMazes()
+        mm1 = mm.MainModel(mazesizes, a)
+        mm1.runMain()
+        mazesArray = mm1.getMazes()
         load_mazeList(mazesArray)
     except AssertionError:
         showwarning("Du har fucket op Sonny Boy",
