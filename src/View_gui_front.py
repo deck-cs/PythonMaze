@@ -251,7 +251,7 @@ scroolbar = tk.Scrollbar(listbox_frame)
 Lb1 = tk.Listbox(listbox_frame, yscrollcommand=scroolbar.set)
 
 ############ LABELS ############
-left_label = tk.Label(left_frame, text='Select number of itterations')
+left_label = tk.Label(left_frame, text='Select number of iterations')
 left_label.place(relx=MAZE_SIZE_RELX, rely=0.2, relwidth=WIDGET_SIZE_RELWIDTH,
                  relheight=WIDGET_SIZE_RELHEIGHT)
 
