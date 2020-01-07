@@ -81,8 +81,6 @@ logo_label.place(
 
 ############ FUNCTIONS ############
 
-# todo this function is going to show in the middle what user selected
-
 
 def pickOfView():
     global variable2, graphs
@@ -132,6 +130,7 @@ def draw_maze(selected_maze):
             if character == "3":
                 display_canvas.create_rectangle(
                     screen_x, screen_y, screen_x+CUBE_SIZE, screen_y+CUBE_SIZE, fill="green")
+            # Check if it is an 4 (representing places visited - dead end)
             if character == "4":
                 display_canvas.create_rectangle(
                     screen_x, screen_y, screen_x+CUBE_SIZE, screen_y+CUBE_SIZE, fill="blue")
