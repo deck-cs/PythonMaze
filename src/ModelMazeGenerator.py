@@ -9,7 +9,6 @@ class MazeGenerator:
             mazEx = MazeException.MazeException()
             mazEx.mazeMess("Invalid size input.")
             raise mazEx
-       # self.generatorType = generatorType
         self.maze = self.make_empty_maze()
 
     # Makes an array, that can be interpreted maze with no walls

@@ -23,7 +23,7 @@ class SubModel:
                 mazes = mazeCon.MazeModel(self.amount, self.sizesList[x])
             except MazeException.MazeException as e: raise
             except Exception as e: raise
-            # self.mazesArray.append(mazes.makeAndSolve())
+            # self.mazesArray.append(mazes.makeAndSolve()) #Unthreaded method
             try:
                 self.mazesArray.append(mazes.threadedMakeAndSolve())
             except Exception as e:
