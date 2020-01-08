@@ -10,15 +10,13 @@ import matplotlib.pyplot as plt
 ############ GLOBAL - Varibels ############
 slide_min = 5  # Slider startværdi
 slide_max = 5  # Slider startværdi
-Mazes = [] # bruges til 
+Mazes = []  # bruges til
 mazesList = []  # bruges til det mazeArray som load_mazeList() får med med og når labyrint vælges i mazeSelect()
 graphs = []
 
 ############ CANVAS - Setup ############
 HEIGHT = 800
 WIDTH = 1200
-MAZE_HEIGHT = 350
-MAZE_WIDTH = 500
 
 MAZE_SIZE_RELX = 0.1
 MAZE_SIZE_RELY = 0.15
