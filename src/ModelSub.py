@@ -81,7 +81,7 @@ class SubModel:
             sum(list(self.attempts.values()))/len(list(self.attempts.values())))
         self.theTimes.append(max(list(self.attempts.values())))
 
-    #
+    # Laver en liste med værdierne for min, avg, max for tid over placevisited
     def getRelatedValues(self, pvList):
         solveList = list(self.attempts.values())
         minKey = min(self.attempts, key=self.attempts.get)-1
@@ -89,7 +89,7 @@ class SubModel:
         self.relatedValues.append(
             (sum(solveList)/len(solveList))/((sum(pvList)/len(pvList))))
         maxKey = max(self.attempts, key=self.attempts.get)-1
-        self.relatedValues.append(min(solveList)/pvList[maxKey])
+        self.relatedValues.append(max(solveList)/pvList[maxKey])
 
     def getPvListFinal(self, pvList):
         self.pvListFinal.append(min(pvList))
