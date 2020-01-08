@@ -29,6 +29,7 @@ class MazeGenerator:
                     pretty_maze[2*y+1+direction[0]][2*x+1+direction[1]] = "0"
         return pretty_maze
 
+
     # Generates and returns a maze
 
     def genMaze(self, maze, coords=(0, 0)):
