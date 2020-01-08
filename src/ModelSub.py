@@ -54,7 +54,7 @@ class SubModel:
             self.attempts[x] = aTry
             x += 1
 
-    def getStatKeys(self):
+    def getStatKeys(self): # Laver liste af navnene som skal bruges på x-aksen på begge grafer
         min = "min"
         min += str(self.iteration)
         avg = "avg"
