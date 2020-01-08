@@ -6,23 +6,28 @@ import MazeException
 
 class SubModel:
     def __init__(self, amount, sizesList):
-        self.amount = amount    #Antal iterationer for hver størrelse
-        self.sizesList = sizesList  #Størrelserne der skal itereres igennem
-        self.solvedTimesList = []   #Tiderne for de løste mazes
-        self.attempts = {}  #Sæt af "tallet" for alle forsøg(1,2,3,4...)
-        self.tryList = []   #Liste der viser min, avg, og max af hver iteration(Bare en masse string værdier)
-        self.iteration = 0  #Værdien af hvilken iteration man er kommet til(5, 10, 15...)
-        self.theTimes = []  #Listen af tider til at løse
-        self.relatedValues = [] #Listen af places visited over tid til at løse
-        self.pvListFinal = []   #Den endelige liste over min, max og avg værdier for places visited
+        self.amount = amount  # Antal iterationer for hver størrelse
+        self.sizesList = sizesList  # Størrelserne der skal itereres igennem
+        self.solvedTimesList = []  # Tiderne for de løste mazes
+        self.attempts = {}  # Sæt af "tallet" for alle forsøg(1,2,3,4...)
+        # Liste der viser min, avg, og max af hver iteration(Bare en masse string værdier)
+        self.tryList = []
+        # Værdien af hvilken iteration man er kommet til(5, 10, 15...)
+        self.iteration = 0
+        self.theTimes = []  # Listen af tider til at løse
+        self.relatedValues = []  # Listen af places visited over tid til at løse
+        # Den endelige liste over min, max og avg værdier for places visited
+        self.pvListFinal = []
         self.mazesArray = []
 
     def makeMazesWithStats(self):
         for x in range(len(self.sizesList)):
             try:
                 mazes = mazeCon.MazeModel(self.amount, self.sizesList[x])
-            except MazeException.MazeException as e: raise
-            except Exception as e: raise
+            except MazeException.MazeException as e:
+                raise
+            except Exception as e:
+                raise
             # self.mazesArray.append(mazes.makeAndSolve()) #Unthreaded method
             try:
                 self.mazesArray.append(mazes.threadedMakeAndSolve())
@@ -54,7 +59,8 @@ class SubModel:
             self.attempts[x] = aTry
             x += 1
 
-    def getStatKeys(self): # Laver liste af navnene som skal bruges på x-aksen på begge grafer
+    # Laver liste af navnene som skal bruges på x-aksen på begge grafer for hver iteration
+    def getStatKeys(self):
         min = "min"
         min += str(self.iteration)
         avg = "avg"
@@ -88,7 +94,7 @@ class SubModel:
         self.pvListFinal.append(sum(pvList)/len(pvList))
         self.pvListFinal.append(max(pvList))
 
-    def makePlots(self,figNum):
+    def makePlots(self, figNum):
         fig1 = plt.figure()
         ax1 = fig1.add_subplot()
         plt.xticks(rotation=45)
@@ -110,9 +116,9 @@ class SubModel:
         fig2 = plt.figure()
         ax3 = fig2.add_subplot()
         ax3 = plt
-        ax3.xticks(rotation=45)#
-        ax3.title("Time over places visited")#
-        ax3.xlabel("Attempt", fontsize=10)#
+        ax3.xticks(rotation=45)
+        ax3.title("Time over places visited")
+        ax3.xlabel("Attempt", fontsize=10)
         ax3.bar(self.tryList, self.relatedValues, width=0.3, align='center')
         ax3.ylabel('Time pr. move', color='tab:red')
         ax3.tick_params(axis='y')
