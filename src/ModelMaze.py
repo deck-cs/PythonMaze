@@ -24,7 +24,7 @@ class MazeModel:
             raise Exception("There must be at least be made one maze pr. size")
         print("Made Controller")
 
-    def makeMaze(self):
+    def makeMaze(self): #Is not in use
         try:
             mazeGen = ModelMazeGenerator.MazeGenerator(self.size, self.size)
         except MazeException.MazeException as e: raise
@@ -37,14 +37,14 @@ class MazeModel:
         # printToFile(maze)
         # readFromFile()
 
-    def solveMaze(self):
+    def solveMaze(self): #Is not in use
         startTime = time.time()  # Initiates the time method
         mazeSolver = ModelMazeSolver.MazeSolver(self.maze)
         mazeSolver.search(0, 1, self.maze, startTime)
         self.pvList.append(mazeSolver.pv)
         self.solvedTimesList.append(mazeSolver.solvedTimes)
 
-    def makeAndSolve(self):
+    def makeAndSolve(self): #Is not in use
         mazes = []
         for _ in range(self.amount):
             self.maze = self.makeMaze()
