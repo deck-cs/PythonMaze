@@ -8,11 +8,10 @@ import matplotlib.pyplot as plt
 # ! Skal gøres - pip install Pillow
 
 ############ GLOBAL - Varibels ############
-CheckVar1 = tk.IntVar
-slide_min = 5
-slide_max = 5
+slide_min = 5  # Slider startværdi
+slide_max = 5  # Slider startværdi
 Mazes = []
-mazesList = []
+mazesList = []  # bruges til det mazeArray som load_mazeList() får med med og når labyrint vælges i mazeSelect()
 graphs = []
 
 ############ CANVAS - Setup ############
@@ -157,7 +156,6 @@ def mazeSelect():
 
 def load_mazeList(mazesArray):
     global mazesList
-    global Mazes
     mazesList = mazesArray
     Lb1.delete(0, tk.END)
     for maze in mazesArray:
