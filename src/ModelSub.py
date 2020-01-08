@@ -83,7 +83,6 @@ class SubModel:
 
     #
     def getRelatedValues(self, pvList):
-        print(self.attempts)
         solveList = list(self.attempts.values())
         minKey = min(self.attempts, key=self.attempts.get)-1
         self.relatedValues.append(min(solveList)/pvList[minKey])
