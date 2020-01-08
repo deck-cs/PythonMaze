@@ -6,15 +6,15 @@ import MazeException
 
 class SubModel:
     def __init__(self, amount, sizesList):
-        self.amount = amount
-        self.sizesList = sizesList
-        self.solvedTimesList = []
-        self.attempts = {}
-        self.tryList = []
-        self.iteration = 0
-        self.theTimes = []
-        self.relatedValues = []
-        self.pvListFinal = []
+        self.amount = amount    #Antal iterationer for hver størrelse
+        self.sizesList = sizesList  #Størrelserne der skal itereres igennem
+        self.solvedTimesList = []   #Tiderne for de løste mazes
+        self.attempts = {}  #Sæt af "tallet" for alle forsøg(1,2,3,4...)
+        self.tryList = []   #Liste der viser min, avg, og max af hver iteration(Bare en masse string værdier)
+        self.iteration = 0  #Værdien af hvilken iteration man er kommet til(5, 10, 15...)
+        self.theTimes = []  #Listen af tider til at løse
+        self.relatedValues = [] #Listen af places visited over tid til at løse
+        self.pvListFinal = []   #Den endelige liste over min, max og avg værdier for places visited
         self.mazesArray = []
 
     def makeMazesWithStats(self):
