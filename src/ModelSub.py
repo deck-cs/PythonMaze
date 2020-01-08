@@ -91,12 +91,15 @@ class SubModel:
         maxKey = max(self.attempts, key=self.attempts.get)-1
         self.relatedValues.append(max(solveList)/pvList[maxKey])
 
+    # Laver en liste med min, avg, max for placevisited
     def getPvListFinal(self, pvList):
         self.pvListFinal.append(min(pvList))
         self.pvListFinal.append(sum(pvList)/len(pvList))
         self.pvListFinal.append(max(pvList))
 
+    # her tegner vi vores grafer
     def makePlots(self, figNum):
+        # Plot 1 - Barplot Time to solve and places visited
         fig1 = plt.figure()
         ax1 = fig1.add_subplot()
         plt.xticks(rotation=45)
@@ -114,7 +117,7 @@ class SubModel:
         plt.xlabel("Attempt", fontsize=10)
         #plt.ylabel("TimeSolved", fontsize=10)
         plt.tick_params(axis='both', which='major', labelsize=10)
-        # Plot 2
+        # Plot 2 - Time over places visited
         fig2 = plt.figure()
         ax3 = fig2.add_subplot()
         ax3 = plt
