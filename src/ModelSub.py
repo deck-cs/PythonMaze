@@ -9,7 +9,7 @@ class SubModel:
         self.amount = amount  # Antal iterationer for hver størrelse
         self.sizesList = sizesList  # Størrelserne der skal itereres igennem
         self.solvedTimesList = []  # Tiderne for de løste mazes
-        self.attempts = {}  # Sæt af "tallet" for alle forsøg(1,2,3,4...)
+        self.attempts = {}  # dictorinary med tider for alle forsøg(1,2,3,4...)
         # Liste der viser min, avg, og max af hver iteration(Bare en masse string værdier)
         self.tryList = []
         # Værdien af hvilken iteration man er kommet til(5, 10, 15...)
@@ -74,13 +74,16 @@ class SubModel:
     def getMazes(self):
         return self.mazesArray
 
+    # Laver en liste med værdierne for min, avg, max for hver iteration
     def getStatValues(self):
         self.theTimes.append(min(list(self.attempts.values())))
         self.theTimes.append(
             sum(list(self.attempts.values()))/len(list(self.attempts.values())))
         self.theTimes.append(max(list(self.attempts.values())))
 
+    #
     def getRelatedValues(self, pvList):
+        print(self.attempts)
         solveList = list(self.attempts.values())
         minKey = min(self.attempts, key=self.attempts.get)-1
         self.relatedValues.append(min(solveList)/pvList[minKey])
